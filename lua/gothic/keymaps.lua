@@ -1,7 +1,4 @@
 local wk = require("which-key")
-
-vim.o.timeoutlen = 200
-
 wk.register({
     m = {
         name = "Manage",
@@ -28,7 +25,7 @@ wk.register({
     ["<C-Right>"] = { "<C-w>l", "Window right" },
     ["<C-Down>"] = { "<C-w>j", "Window down" },
     ["<C-Up>"] = { "<C-w>k", "Window up" },
-    ["<C-s>"] = { "<cmd>w<CR>", "Window up" },
+    -- ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
     ["<tab>"] = { "<Cmd>BufferNext<CR>", "Next buffer" },
     ["<S-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
     ["<C-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
@@ -39,8 +36,7 @@ wk.register({
     ["<C-q>"] = { "<cmd>NvimTreeClose<CR><cmd>mksession! .vim<CR><cmd>qa!<CR>", "Quit" },
     x = { "<cmd>qa!<CR>", "Quit without saving session" },
         -- w = { "<cmd>qw<CR>", "Save and quit" },
-
-},  { mode = "n", prefix = "<C-q>" }
+},  { mode = {"i", "n", "v"}, prefix = "<C-q>" }
 )
 
 wk.register({
@@ -48,25 +44,31 @@ wk.register({
     ["<C-l>"] = { "<Right>", "Right" },
     ["<C-j>"] = { "<Down>", "Down" },
     ["<C-k>"] = { "<Up>", "Up" },
+    -- ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
 },  { mode = "i", prefix = "" }
 )
 
+wk.register({
+    ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
+},  {mode = {"i", "n", "v"}, prefix = "" }
+)
 
--- As an example, we will create the following mappings:
---  * <leader>ff find files
---  * <leader>fr show recent files
---  * <leader>fb Foobar
--- we'll document:
---  * <leader>fn new file
---  * <leader>fe edit file
--- and hide <leader>1
-
---   f = {
---     name = "file", -- optional group name
---     -- f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
---     -- r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap=false, buffer = 123 }, -- additional options for creating the keymap
---     n = { "New File" }, -- just a label. don't create any mapping
---     e = "Edit File", -- same as above
---     -- ["1"] = "which_key_ignore",  -- special label to hide it in the popup
---     -- b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
---   },
+require("nvim-tree").setup {
+    on_attach = function(bufnr)
+        local api = require "nvim-tree.api"
+    
+        local function opts(desc)
+            return {
+                desc = "nvim-tree: " .. desc,
+                buffer = bufnr,
+                noremap = true,
+                silent = true,
+                nowait = false
+            }
+        end
+        api.config.mappings.default_on_attach(bufnr)
+        vim.keymap.del('n', '<tab>', {
+            buffer = bufnr
+        })
+    end
+}
