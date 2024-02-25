@@ -1,5 +1,18 @@
 local nvimtreeapi = require "nvim-tree.api"
 
+local function handle_cursor(left)
+    if left then
+        nvimtreeapi.node.navigate.parent_close()
+        return
+    end
+    local node = nvimtreeapi.tree.get_node_under_cursor()
+    if vim.fn.isdirectory(node.absolute_path) == 1 then
+        nvimtreeapi.node.open.edit()
+        vim.cmd('norm! j')
+    end
+    -- print(vim.fn.isdirectory(node.absolute_path)) -- and nvimtreeapi.tree.open()
+end
+
 require("nvim-tree").setup {
     on_attach = function(bufnr)
         local function opts(desc)
@@ -15,7 +28,15 @@ require("nvim-tree").setup {
         vim.keymap.del('n', '<tab>', {
             buffer = bufnr
         })
+        vim.keymap.set('n', 'h', function() handle_cursor(true) end, opts('Close Directory'))
+        vim.keymap.set('n', 'l', handle_cursor, opts('Open Directory'))
+        -- tree.get_node_under_cursor()
     end,
+    actions = {
+        open_file = {
+            quit_on_open = true,
+        },
+    },
     -- hijack_directories = {
     --     enable = false,
     --     auto_open = false
@@ -23,17 +44,27 @@ require("nvim-tree").setup {
 }
 
 local wk = require("which-key")
+local telescope = require('telescope.builtin')
 wk.register({
     m = {
         name = "Manage",
         p = { "<cmd>Lazy<CR>", "Plugins" },
-        c = { 
+        c = {
             name = "Colors",
             ["1"] = { "<cmd>colorscheme tokyonight<CR>", "Tokio Night" },
             ["2"] = { "<cmd>colorscheme tokyonight-moon<CR>", "Tokio Moon" },
             ["3"] = { "<cmd>colorscheme tokyonight-night<CR>", "Tokio Night Night" },
             ["4"] = { "<cmd>colorscheme tokyonight-storm<CR>", "Tokio Storm" },
         },
+    },
+    f = {
+        name = "Telescope",
+        f = { function() telescope.find_files() end, "Find Files" },
+        g = { function() telescope.live_grep() end, "Find in Files" },
+        b = { function() telescope.buffers() end, "Find in Buffers" },
+        h = { function() telescope.help_tags() end, "Help" },
+        -- n = { function() telescope.file_browser() end, "New File" },
+        -- e = { function() telescope.file_browser() end, "Edit File" },
     },
 
 }, { mode = "n", prefix = "<leader>" }
@@ -53,6 +84,8 @@ wk.register({
     ["<tab>"] = { "<Cmd>BufferNext<CR>", "Next buffer" },
     ["<S-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
     ["<C-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
+    ["<C-S-z>"] = { "<cmd>redo<CR>", "Redo" },
+    ["<C-S-p>"] = { function() telescope.live_grep() end, "Find In Files" },
 },  { mode = "n", prefix = "" }
 )
 -- "<cmd>NvimTreeClose<CR><cmd>mksession! .vim<CR><cmd>qa!<CR>",
@@ -85,7 +118,19 @@ wk.register({
 
 wk.register({
     ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
+    ["<C-z>"] = { "<cmd>u<CR>", "Undo" },
+    ["<C-p>"] = { function() telescope.find_files() end, "Find Files" },
 },  {mode = {"i", "n", "v"}, prefix = "" }
 )
+wk.register({
+},  {mode = {"n", "v"}, prefix = "" }
+)
+
+-- wk.register({
+--     ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
+--     ["<C-z>"] = { "<cmd>u<CR>", "Undo" },
+--     ["<C-S-Z>"] = { "<cmd>redo<CR>", "Save file" },
+-- },  {mode = "n", prefix = "<C-p>" }
+-- )
 
 return nvimtreeapi

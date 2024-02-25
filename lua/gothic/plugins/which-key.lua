@@ -1,6 +1,4 @@
-return 
-{
-{
+return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
@@ -9,8 +7,6 @@ return
     end,
     opts = {}
 }
-}
-
 -- As an example, we will create the following mappings:
 --  * <leader>ff find files
 --  * <leader>fr show recent files

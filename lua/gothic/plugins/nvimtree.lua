@@ -12,7 +12,7 @@ return
         --         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
         --     end,
         -- })
-        -- require("nvim-tree").setup {
+--        require("nvim-tree").setup {
         --     on_attach = function(bufnr)
         --         local api = require "nvim-tree.api"
         --         local function opts(desc)
@@ -33,8 +33,8 @@ return
         --         enable = false,
         --         auto_open = false
         --     }
-        -- }
-    end,
+--        }
+   end,
     opts = {}
 }
 }

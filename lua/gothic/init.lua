@@ -5,7 +5,8 @@ vim.opt.termguicolors = true
 vim.cmd.colorscheme('tokyonight')
 vim.cmd("set relativenumber")
 -- require("gothic.keyseer")
-local nvimtreeapi = require("gothic.keymaps")
+-- local nvimtreeapi = 
+require("gothic.keymaps")
 -- nvimtreeapi.tree.close()
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
@@ -40,7 +41,7 @@ local function showBuffersInFloatingWindow()
             print("Buffer Number: " .. buf)
             local is_listed = vim.api.nvim_buf_get_option(buf, 'buflisted')
             table.insert(buffers, "Buf Num: " .. buf .. ", Buf Name: " .. buf_name .. 
-            -- ", Listed: " .. tostring(is_listed) .. ", t: " .. tostring(vim.bo[buf].readonly) ..
+            ", Listed: " .. tostring(is_listed) .. ", t: " .. tostring(vim.bo[buf].readonly) ..
             ", cwd?: " .. tostring(buf_name == vim.fn.getcwd()))
         end
         if buf_name == vim.fn.getcwd() then
