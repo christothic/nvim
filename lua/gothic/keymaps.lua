@@ -1,3 +1,27 @@
+local nvimtreeapi = require "nvim-tree.api"
+
+require("nvim-tree").setup {
+    on_attach = function(bufnr)
+        local function opts(desc)
+            return {
+                desc = "nvim-tree: " .. desc,
+                buffer = bufnr,
+                noremap = true,
+                silent = true,
+                nowait = false
+            }
+        end
+        nvimtreeapi.config.mappings.default_on_attach(bufnr)
+        vim.keymap.del('n', '<tab>', {
+            buffer = bufnr
+        })
+    end,
+    -- hijack_directories = {
+    --     enable = false,
+    --     auto_open = false
+    -- }
+}
+
 local wk = require("which-key")
 wk.register({
     m = {
@@ -16,7 +40,7 @@ wk.register({
 )
 wk.register({
     -- ["<C-e>"] = { "<cmd>NvimTreeToggle<CR>", "File Explorer" },
-    ["<leader>e"] = { "<cmd>NvimTreeFocus<CR>", "Focus File Explorer" },
+    ["<leader>e"] = { "<cmd>NvimTreeFindFile<CR>", "Focus File Explorer" },
     ["<C-h>"] = { "<C-w>h", "Window left" },
     ["<C-l>"] = { "<C-w>l", "Window right" },
     ["<C-j>"] = { "<C-w>j", "Window down" },
@@ -31,9 +55,20 @@ wk.register({
     ["<C-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
 },  { mode = "n", prefix = "" }
 )
+-- "<cmd>NvimTreeClose<CR><cmd>mksession! .vim<CR><cmd>qa!<CR>",
 wk.register({
-    q = { "<cmd>NvimTreeClose<CR><cmd>mksession! .vim<CR><cmd>qa!<CR>", "Quit" },
-    ["<C-q>"] = { "<cmd>NvimTreeClose<CR><cmd>mksession! .vim<CR><cmd>qa!<CR>", "Quit" },
+    q  = { function()
+        nvimtreeapi.tree.close_in_all_tabs()
+        nvimtreeapi.tree.close()
+        vim.cmd("mksession! .vim")
+        vim.cmd("qa!")
+    end, "Quit" },
+    ["<C-q>"] = { function()
+        nvimtreeapi.tree.close_in_all_tabs()
+        nvimtreeapi.tree.close()
+        vim.cmd("mksession! .vim")
+        vim.cmd("qa!")
+    end, "Quit" },
     x = { "<cmd>qa!<CR>", "Quit without saving session" },
         -- w = { "<cmd>qw<CR>", "Save and quit" },
 },  { mode = {"i", "n", "v"}, prefix = "<C-q>" }
@@ -53,22 +88,4 @@ wk.register({
 },  {mode = {"i", "n", "v"}, prefix = "" }
 )
 
-require("nvim-tree").setup {
-    on_attach = function(bufnr)
-        local api = require "nvim-tree.api"
-    
-        local function opts(desc)
-            return {
-                desc = "nvim-tree: " .. desc,
-                buffer = bufnr,
-                noremap = true,
-                silent = true,
-                nowait = false
-            }
-        end
-        api.config.mappings.default_on_attach(bufnr)
-        vim.keymap.del('n', '<tab>', {
-            buffer = bufnr
-        })
-    end
-}
+return nvimtreeapi
