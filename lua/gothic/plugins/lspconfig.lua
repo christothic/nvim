@@ -1,12 +1,18 @@
-return 
-{
-{
+
+
+return {
     "neovim/nvim-lspconfig",
     version = "*",
     lazy = false,
     config = function()
         local lsp = require('lspconfig')
         lsp.lua_ls.setup {
+            -- on_attach = function(bufnr)
+            --     local on_attach = function(_, bufnr)
+            --         return require('completion').on_attach
+            --     end
+            -- end,
+            -- on_attach = require'completion'.on_attach,
             on_init = function(client)
                 local path = client.workspace_folders[1].name
                 if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
@@ -43,7 +49,6 @@ return
         })
     end,
     opts = {}
-}
 }
 
 -- Setup language servers.

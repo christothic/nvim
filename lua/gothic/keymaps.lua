@@ -12,6 +12,13 @@ local function handle_cursor(left)
     end
     -- print(vim.fn.isdirectory(node.absolute_path)) -- and nvimtreeapi.tree.open()
 end
+            -- mapping = cmp.mapping.preset.insert({
+            --     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+            --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            --     ["<C-Space>"] = cmp.mapping.complete(),
+            --     ["<C-e>"] = cmp.mapping.abort(),
+            --     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            -- }),
 
 require("nvim-tree").setup {
     on_attach = function(bufnr)
@@ -85,7 +92,8 @@ wk.register({
     ["<S-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
     ["<C-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
     ["<C-S-z>"] = { "<cmd>redo<CR>", "Redo" },
-    ["<C-S-p>"] = { function() telescope.live_grep() end, "Find In Files" },
+    ["<C-S-f>"] = { function() telescope.live_grep() end, "Find In Files" },
+    ["<C-p>"] = { function() telescope.find_files() end, "Find Files" },
 },  { mode = "n", prefix = "" }
 )
 -- "<cmd>NvimTreeClose<CR><cmd>mksession! .vim<CR><cmd>qa!<CR>",
@@ -112,6 +120,10 @@ wk.register({
     ["<C-l>"] = { "<Right>", "Right" },
     ["<C-j>"] = { "<Down>", "Down" },
     ["<C-k>"] = { "<Up>", "Up" },
+    ["<C-Space>"] = { function() require'cmp'.mapping.complete() end, "Start autocomplete" },
+    ["<C-e>"] = { function() require'cmp'.mapping.abort() end, "Abort autocompletion" },
+    ["<CR>"] = { function() require'cmp'.mapping.confirm({ select = true }) end, "Confim autocompletion"},
+    
     -- ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
 },  { mode = "i", prefix = "" }
 )
@@ -122,10 +134,20 @@ wk.register({
     ["<C-p>"] = { function() telescope.find_files() end, "Find Files" },
 },  {mode = {"i", "n", "v"}, prefix = "" }
 )
-wk.register({
-},  {mode = {"n", "v"}, prefix = "" }
-)
 
+-- wk.register({
+-- },  {mode = {"n", "v"}, prefix = "" }
+-- )
+-- wk.register({
+--     ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
+--     ["<C-z>"] = { "<cmd>u<CR>", "Undo" },
+--     ["<C-p>"] = { function() telescope.find_files() end, "Find Files" },
+-- },  {mode = {"i", "n", "v"}, prefix = "" }
+-- )
+-- f = { function() telescope.find_files() end, "Find Files" },
+-- g = { function() telescope.live_grep() end, "Find in Files" },
+-- b = { function() telescope.buffers() end, "Find in Buffers" },
+-- h = { function() telescope.help_tags() end, "Help" },
 -- wk.register({
 --     ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
 --     ["<C-z>"] = { "<cmd>u<CR>", "Undo" },
