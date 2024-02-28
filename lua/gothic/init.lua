@@ -81,8 +81,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        local f = io.open('.vim', "r")
+    callback = function() local f = io.open('.vim', "r")
         if (f ~= nil) then
             io.close(f)
             if debug then
@@ -90,7 +89,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
             end
             vim.defer_fn(function()
                 vim.cmd('source .vim') 
-            end , 100)
+            end , 50)
         else
             if debug then
                 table.insert(debug_Info, "no .vim on " .. tostring(vim.fn.getcwd()))

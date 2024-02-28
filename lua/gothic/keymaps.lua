@@ -12,13 +12,8 @@ local function handle_cursor(left)
     end
     -- print(vim.fn.isdirectory(node.absolute_path)) -- and nvimtreeapi.tree.open()
 end
-            -- mapping = cmp.mapping.preset.insert({
-            --     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-            --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            --     ["<C-Space>"] = cmp.mapping.complete(),
-            --     ["<C-e>"] = cmp.mapping.abort(),
-            --     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-            -- }),
+
+
 
 require("nvim-tree").setup {
     on_attach = function(bufnr)
@@ -68,6 +63,7 @@ wk.register({
         name = "Telescope",
         f = { function() telescope.find_files() end, "Find Files" },
         g = { function() telescope.live_grep() end, "Find in Files" },
+        w = { function() telescope.buffers() end, "Find workspaces" },
         b = { function() telescope.buffers() end, "Find in Buffers" },
         h = { function() telescope.help_tags() end, "Help" },
         -- n = { function() telescope.file_browser() end, "New File" },
@@ -120,9 +116,9 @@ wk.register({
     ["<C-l>"] = { "<Right>", "Right" },
     ["<C-j>"] = { "<Down>", "Down" },
     ["<C-k>"] = { "<Up>", "Up" },
-    ["<C-Space>"] = { function() require'cmp'.mapping.complete() end, "Start autocomplete" },
-    ["<C-e>"] = { function() require'cmp'.mapping.abort() end, "Abort autocompletion" },
-    ["<CR>"] = { function() require'cmp'.mapping.confirm({ select = true }) end, "Confim autocompletion"},
+    -- ["<C-Space>"] = { function() require'cmp'.mapping.complete() end, "Start autocomplete" },
+    -- ["<C-e>"] = { function() require'cmp'.mapping.abort() end, "Abort autocompletion" },
+    -- ["<C-CR>"] = { function() require'cmp'.mapping.confirm({ select = true }) end, "Confim autocompletion"},
     
     -- ["<C-s>"] = { "<cmd>w<CR>", "Save file" },
 },  { mode = "i", prefix = "" }

@@ -1,16 +1,14 @@
-return 
+return
 {
-    "nvim-treesitter/nvim-treesitter",
+    "natecraddock/workspaces.nvim",
     version = "*",
     lazy = false,
     config = function()
-        local ts = require('nvim-treesitter.configs')
-        ts.setup {
-            ensure_installed = {"c", "lua", "vim", "vimdoc", "query"},
-            highlight = {
-                enable = true
-            }
-        }
+        require('workspaces').setup({
+            hooks = {
+                -- open = { "Teslescope find_files"},
+            },
+        })
         -- local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
         -- parser_config.powershell = {
         --     install_info = {

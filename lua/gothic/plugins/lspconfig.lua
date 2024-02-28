@@ -6,6 +6,11 @@ return {
     lazy = false,
     config = function()
         local lsp = require('lspconfig')
+        lsp.clangd.setup {
+            cmd = { "clangd", "--background-index" },
+            filetypes = { "c", "cpp", "objc", "objcpp" },
+            root_dir = lsp.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+        }
         lsp.lua_ls.setup {
             -- on_attach = function(bufnr)
             --     local on_attach = function(_, bufnr)
@@ -26,7 +31,8 @@ return {
                             -- Make the server aware of Neovim runtime files
                             workspace = {
                                 checkThirdParty = false,
-                                library = {vim.env.VIMRUNTIME -- "${3rd}/luv/library"
+                                library = {
+                                    vim.env.VIMRUNTIME -- "${3rd}/luv/library"
                                 -- "${3rd}/busted/library",
                                 }
                                 -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
@@ -42,9 +48,13 @@ return {
             end
         }
         vim.api.nvim_create_autocmd('LspAttach', {
-            group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+            group = vim.api.nvim_create_augroup('UserLspConfig', {
+            }),
             callback = function(ev)
                 vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+                vim.diagnostic.config({
+                    update_in_insert = true,
+                })
             end,
         })
     end,
