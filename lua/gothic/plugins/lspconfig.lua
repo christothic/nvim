@@ -1,64 +1,78 @@
-
-
 return {
-    "neovim/nvim-lspconfig",
-    version = "*",
-    lazy = false,
-    config = function()
-        local lsp = require('lspconfig')
-        lsp.clangd.setup {
-            cmd = { "clangd", "--background-index" },
-            filetypes = { "c", "cpp", "objc", "objcpp" },
-            root_dir = lsp.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-        }
-        lsp.lua_ls.setup {
-            -- on_attach = function(bufnr)
-            --     local on_attach = function(_, bufnr)
-            --         return require('completion').on_attach
-            --     end
-            -- end,
-            -- on_attach = require'completion'.on_attach,
-            on_init = function(client)
-                local path = client.workspace_folders[1].name
-                if not vim.loop.fs_stat(path .. '/.luarc.json') and not vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-                    client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
-                        Lua = {
-                            runtime = {
-                                -- Tell the language server which version of Lua you're using
-                                -- (most likely LuaJIT in the case of Neovim)
-                                version = 'LuaJIT'
-                            },
-                            -- Make the server aware of Neovim runtime files
-                            workspace = {
-                                checkThirdParty = false,
-                                library = {
-                                    vim.env.VIMRUNTIME -- "${3rd}/luv/library"
-                                -- "${3rd}/busted/library",
-                                }
-                                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-                                -- library = vim.api.nvim_get_runtime_file("", true)
-                            }
-                        }
-                    })
-                    client.notify("workspace/didChangeConfiguration", {
-                        settings = client.config.settings
-                    })
-                end
-                return true
-            end
-        }
-        vim.api.nvim_create_autocmd('LspAttach', {
-            group = vim.api.nvim_create_augroup('UserLspConfig', {
-            }),
-            callback = function(ev)
-                vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-                vim.diagnostic.config({
-                    update_in_insert = true,
-                })
-            end,
-        })
-    end,
-    opts = {}
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup()
+		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		version = "*",
+		lazy = false,
+		config = function()
+			local lsp = require("lspconfig")
+			lsp.clangd.setup({
+				cmd = { "clangd", "--background-index" },
+				filetypes = { "c", "cpp", "objc", "objcpp" },
+				root_dir = lsp.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+			})
+			lsp.lua_ls.setup({
+				-- on_attach = function(bufnr)
+				--     local on_attach = function(_, bufnr)
+				--         return require('completion').on_attach
+				--     end
+				-- end,
+				-- on_attach = require'completion'.on_attach,
+				on_init = function(client)
+					local path = client.workspace_folders[1].name
+					if
+						not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc")
+					then
+						client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+							Lua = {
+								runtime = {
+									-- Tell the language server which version of Lua you're using
+									-- (most likely LuaJIT in the case of Neovim)
+									version = "LuaJIT",
+								},
+								-- Make the server aware of Neovim runtime files
+								workspace = {
+									checkThirdParty = false,
+									library = {
+										vim.env.VIMRUNTIME, -- "${3rd}/luv/library"
+										-- "${3rd}/busted/library",
+									},
+									-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+									-- library = vim.api.nvim_get_runtime_file("", true)
+								},
+							},
+						})
+						client.notify("workspace/didChangeConfiguration", {
+							settings = client.config.settings,
+						})
+					end
+					return true
+				end,
+			})
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(ev)
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+					vim.diagnostic.config({
+						update_in_insert = true,
+					})
+				end,
+			})
+		end,
+
+		opts = {},
+	},
 }
 
 -- Setup language servers.
@@ -66,12 +80,11 @@ return {
 --lspconfig.pyright.setup {}
 --lspconfig.tsserver.setup {}
 --lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
-  --settings = {
-  --  ['rust-analyzer'] = {},
-  --},
+-- Server-specific settings. See `:help lspconfig-setup`
+--settings = {
+--  ['rust-analyzer'] = {},
+--},
 --}
-
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -88,8 +101,8 @@ return {
 --    -- Enable completion triggered by <c-x><c-o>
 --    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
+-- Buffer local mappings.
+-- See `:help vim.lsp.*` for documentation on any of the below functions
 --    local opts = { buffer = ev.buf }
 --    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 --    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)

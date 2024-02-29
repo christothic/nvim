@@ -48,6 +48,8 @@ require("nvim-tree").setup {
 local wk = require("which-key")
 local telescope = require('telescope.builtin')
 wk.register({
+    q = { "<cmd>BufferClose<CR>", "Quit Current Buffer" },
+    e = { "<cmd>NvimTreeFindFile<CR>", "Focus File Explorer" },
     m = {
         name = "Manage",
         p = { "<cmd>Lazy<CR>", "Plugins" },
@@ -59,11 +61,17 @@ wk.register({
             ["4"] = { "<cmd>colorscheme tokyonight-storm<CR>", "Tokio Storm" },
         },
     },
+    w = {
+        name = "Workspaces",
+        o = { "<cmd>WorkspacesOpen<CR>", "Open workspace" },
+        -- e = { function() telescope.file_browser() end, "Edit File" },
+    },
+
     f = {
         name = "Telescope",
         f = { function() telescope.find_files() end, "Find Files" },
         g = { function() telescope.live_grep() end, "Find in Files" },
-        w = { function() telescope.buffers() end, "Find workspaces" },
+        w = { "<cmd>Telescope workspaces<CR>", "Find workspaces" },
         b = { function() telescope.buffers() end, "Find in Buffers" },
         h = { function() telescope.help_tags() end, "Help" },
         -- n = { function() telescope.file_browser() end, "New File" },
@@ -74,7 +82,6 @@ wk.register({
 )
 wk.register({
     -- ["<C-e>"] = { "<cmd>NvimTreeToggle<CR>", "File Explorer" },
-    ["<leader>e"] = { "<cmd>NvimTreeFindFile<CR>", "Focus File Explorer" },
     ["<C-h>"] = { "<C-w>h", "Window left" },
     ["<C-l>"] = { "<C-w>l", "Window right" },
     ["<C-j>"] = { "<C-w>j", "Window down" },

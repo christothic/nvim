@@ -88,9 +88,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
                 table.insert(debug_Info, "Found .vim")
             end
             vim.defer_fn(function()
-                vim.cmd('source .vim') 
+                vim.cmd('source .vim')
             end , 50)
         else
+            vim.cmd('Telescope workspaces')
             if debug then
                 table.insert(debug_Info, "no .vim on " .. tostring(vim.fn.getcwd()))
             end
