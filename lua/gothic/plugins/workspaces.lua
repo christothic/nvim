@@ -8,7 +8,7 @@ return
             hooks = {
                 open = {
                     "source .vim",
-                    "NvimTreeFindFile",
+                    -- "NvimTreeFindFile",
                     "Telescope find_files"
                 },
             },
