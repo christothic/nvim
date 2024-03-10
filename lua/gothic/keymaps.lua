@@ -55,6 +55,7 @@ local function gothicKeys()
 		m = {
 			name = "Manage",
 			p = { "<cmd>Lazy<CR>", "Plugins" },
+			l = { "<cmd>Mason<CR>", "LSPs" },
 			c = {
 				name = "Colors",
 				["1"] = { "<cmd>colorscheme tokyonight<CR>", "Tokio Night" },
@@ -77,6 +78,7 @@ local function gothicKeys()
 		},
 		f = {
 			name = "Telescope",
+			c = { "<cmd>Telescope neoclip<cr>", "Find in Clipboards" },
 			f = {
 				function()
 					telescope.find_files()
@@ -121,13 +123,13 @@ local function gothicKeys()
 		["<S-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
 		["<C-tab>"] = { "<Cmd>BufferPrevious<CR>", "Previous buffer" },
 		-- ["<C-p>"] = { function() print("your sis") end, "Previous buffer" },
-		-- ["<C-Space>"] = {
-		-- 	function()
-		-- 		print("your sis")
-		-- 	end,
-		-- 	"Previous buffer",
-		-- },
-		-- ["<C-S-z>"] = { "<cmd>redo<CR>", "Redo"  },
+		["<C-Space>"] = {
+			function()
+				print("your sis")
+			end,
+			"Previous buffer",
+		},
+		["<C-S-z>"] = { "<cmd>redo<CR>", "Redo" },
 		["<C-S-f>"] = {
 			function()
 				telescope.live_grep()
@@ -208,7 +210,7 @@ local function gothicKeys()
 end
 
 local function lspKeymaps(buf)
-    -- vim.keymap.set("i", "<C-e>", vim.lsp.buf.hover, opts)
+	-- vim.keymap.set("i", "<C-e>", vim.lsp.buf.hover, opts)
 	-- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 	-- vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
 	-- vim.keymap.set("n", "<space>wl", function()
@@ -220,42 +222,42 @@ local function lspKeymaps(buf)
 	-- 	vim.lsp.buf.format({ async = true })
 	-- end, opts)
 	wk.register({
-        -- ["<space>f"] = {
-        --     function()
-        --         vim.lsp.buf.format({ async = true })
-        --     end,
-        --     "Format",
-        -- },
-        -- ["<space>ca"] = {
-        --     function()
-        --         vim.lsp.buf.code_action()
-        --     end,
-        --     "Code action",
-        -- },
-        -- ["<space>rn"] = {
-        --     function()
-        --         vim.lsp.buf.rename()
-        --     end,
-        --     "Rename",
-        -- },
-        -- ["<space>wl"] = {
-        --     function()
-        --         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        --     end,
-        --     "List workspace folders",
-        -- },
-        -- ["<space>wr"] = {
-        --     function()
-        --         vim.lsp.buf.remove_workspace_folder()
-        --     end,
-        --     "Remove workspace folder",
-        -- },
-        -- ["<space>wa"] = {
-        --     function()
-        --         vim.lsp.buf.add_workspace_folder()
-        --     end,
-        --     "Add workspace folder",
-        -- },
+		-- ["<space>f"] = {
+		--     function()
+		--         vim.lsp.buf.format({ async = true })
+		--     end,
+		--     "Format",
+		-- },
+		-- ["<space>ca"] = {
+		--     function()
+		--         vim.lsp.buf.code_action()
+		--     end,
+		--     "Code action",
+		-- },
+		-- ["<space>rn"] = {
+		--     function()
+		--         vim.lsp.buf.rename()
+		--     end,
+		--     "Rename",
+		-- },
+		-- ["<space>wl"] = {
+		--     function()
+		--         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		--     end,
+		--     "List workspace folders",
+		-- },
+		-- ["<space>wr"] = {
+		--     function()
+		--         vim.lsp.buf.remove_workspace_folder()
+		--     end,
+		--     "Remove workspace folder",
+		-- },
+		-- ["<space>wa"] = {
+		--     function()
+		--         vim.lsp.buf.add_workspace_folder()
+		--     end,
+		--     "Add workspace folder",
+		-- },
 		K = {
 			function()
 				vim.lsp.buf.hover()
@@ -304,9 +306,15 @@ local function lspKeymaps(buf)
 		},
 	}, { mode = { "n" }, prefix = "g", buffer = buf })
 end
+
+local function cmpKeymaps()
+	print("AAAAAA")
+end
+
 local result = {
 	gothicKeys = gothicKeys,
 	lspKeymaps = lspKeymaps,
+	cmpKeymaps = cmpKeymaps,
 }
 
 -- wk.register({
