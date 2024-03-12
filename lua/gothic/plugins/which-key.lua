@@ -2,7 +2,7 @@ local M = {}
 
 M.plugin = { -- Useful plugin to show you pending keybinds.
 'folke/which-key.nvim',
-event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+event = 'VimEnter', -- Sets the loading event to 'VimEnter' --UIEnter
 config = function() -- This is the function that runs, AFTER loading
   require('which-key').setup()
 
