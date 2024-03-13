@@ -36,6 +36,16 @@ M.set_default_keys = function()
     vim.keymap.set("n", "<S-tab>", "<Cmd>BufferPrevious<CR>", { desc = "Previous buffer" })
     vim.keymap.set("n", "<C-tab>", "<Cmd>BufferPrevious<CR>", { desc = "Previous buffer" })
     vim.keymap.set("n", "<leader>q", "<cmd>BufferClose<CR>", { desc = "Quit Current Buffer" })
+
+    -- Terminal stuff
+    vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
+    vim.keymap.set("n", "<leader>ot", "<cmd>ToggleTerm<CR>", { desc = "Open new terminal" })
+
+    -- Manage keys
+    -- Neo tree
+    vim.keymap.set("n", "<leader>mg", "<cmd>Neotree float git_status<CR>", { desc = "Manage Git" })
+    vim.keymap.set("n", "<leader>mp", "<cmd>Lazy<CR>", { desc = "Manage Plugins" })
+    vim.keymap.set("n", "<leader>ml", "<cmd>Mason<CR>", { desc = "Manage LSPs" })
 end
 
 M.set_lsp_keys = function() end
