@@ -1,5 +1,5 @@
 local M = {}
-
+-- alternatives: nerdtree, nvimtree, *neotree
 M.plugin = {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",

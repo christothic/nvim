@@ -14,6 +14,10 @@ M.set_default_keys = function()
     vim.keymap.set({ "n", "v" }, "<up>", '<cmd>echo "Use k to move!!"<CR>')
     vim.keymap.set({ "n", "v" }, "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
+    -- Undo breaks
+    vim.keymap.set("i", "<Space>", "<Space><C-g>u")
+    vim.keymap.set("i", "<Tab>", "<Tab><C-g>u")
+    vim.keymap.set("i", "<CR>", "<CR><C-g>u")
     -- Keybinds to make split navigation easier.
     --  Use CTRL+<hjkl> to switch between windows
     --
@@ -23,9 +27,16 @@ M.set_default_keys = function()
     vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
     vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-    vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
-    vim.keymap.set({ "n", "v", "i" }, "<C-z>", "<cmd>u<CR>", { desc = "Undo" })
-    vim.keymap.set({ "n", "v" }, "<C-r>", "<cmd>redo<CR>", { desc = "Redo" })
+    vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+    vim.keymap.set("i", "<C-s>", "<cmd>w<CR><ESC>", { desc = "Save file" })
+    vim.keymap.set("i", "<C-z>", "<ESC><cmd>u<CR>", { desc = "Exit insert mode and undo" })
+    vim.keymap.set({ "n", "v" }, "<C-z>", "<cmd>u<CR>", { desc = "Undo" })
+    -- vim.keymap.set({ "n", "v" }, "<C-S-Z>", "<cmd>redo<CR>", { desc = "Redo" })
+    -- vim.keymap.set({ "n", "v" }, "<C-S-z>", "<cmd>redo<CR>", { desc = "Redo" })
+    vim.keymap.set({ "n", "v" }, "<M-z>", "<cmd>redo<CR>", { desc = "Redo" })
+    -- vim.keymap.set({ "n", "v" }, "<C-M-Z>", "<cmd>redo<CR>", { desc = "Redo" })
+    -- vim.keymap.set({ "n", "v" }, "<C-Z>", "<cmd>redo<CR>", { desc = "Redo" })
+    -- vim.keymap.set({ "n", "v" }, "<C-r>", "<cmd>redo<CR>", { desc = "Redo" })
 
     -- Undo Tree
     vim.keymap.set("n", "<leader>u", function() vim.cmd("UndotreeToggle") end, { desc = "Toggle undo tree" })
@@ -108,7 +119,8 @@ M.set_telescope_keys = function()
         { desc = "Find in Open Files" }
     )
     -- Shortcut for searching your neovim configuration files
-    vim.keymap.set("n", "<leader>fn", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find in neovim files" })
+    -- vim.keymap.set("n", "<leader>fn", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find in neovim files" })
+    vim.keymap.set("n", "<leader>fv", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find in neovim files" })
 end
 
 M.set_commenter_keys = function() end

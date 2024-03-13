@@ -1,31 +1,32 @@
 local M = {}
 
 M.plugin = {
-        "nvim-treesitter/nvim-treesitter",
-        -- build = ":TSUpdate",
-        -- version = "*",
-        -- lazy = false,
-        config = function()
-            local ts = require("nvim-treesitter.configs")
-            ts.setup({
-                ensure_installed = { "bash", "c", "html", "lua", "markdown", "vim", "vimdoc", "query" },
-                auto_install = true,
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
-            -- local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
-            -- parser_config.powershell = {
-            --     install_info = {
-            --         url = "~/<WhereIClonedTheRepo>/tree-sitter-PowerShell",
-            --         files = { "src/parser.c" },
-            --         branch = "main",
-            --         generate_requires_npm = false,
-            --         requires_generate_from_grammar = false,
-            --     },
-            --     filetype = "ps1",
-            -- }
-        end,
-        opts = {},
+    "nvim-treesitter/nvim-treesitter",
+    -- build = ":TSUpdate",
+    -- version = "*",
+    -- lazy = false,
+    config = function()
+        require("nvim-treesitter.install").prefer_git = true
+        local ts = require("nvim-treesitter.configs")
+        ts.setup({
+            ensure_installed = { "bash", "c", "cpp", "html", "lua", "markdown", "vim", "vimdoc", "query" },
+            auto_install = true,
+            highlight = { enable = true },
+            indent = { enable = true },
+        })
+        -- local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
+        -- parser_config.powershell = {
+        --     install_info = {
+        --         url = "~/<WhereIClonedTheRepo>/tree-sitter-PowerShell",
+        --         files = { "src/parser.c" },
+        --         branch = "main",
+        --         generate_requires_npm = false,
+        --         requires_generate_from_grammar = false,
+        --     },
+        --     filetype = "ps1",
+        -- }
+    end,
+    opts = {},
     -- "nvim-treesitter/nvim-treesitter",
     -- build = ":TSUpdate",
     -- opts = {
