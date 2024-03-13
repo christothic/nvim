@@ -9,8 +9,8 @@ M.plugin = {
             hooks = {
                 open = {
                     function()
+                        -- if not vim.g.user_utils.load_vim_session() then vim.cmd("Telescope find_files") end
                         vim.g.user_utils.load_vim_session()
-                        -- print("Opened workspace")
                     end,
                     "Telescope find_files",
                 },

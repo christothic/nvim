@@ -10,7 +10,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.api.nvim_create_autocmd("VimLeavePre", {
-    callback = function() vim.cmd("mksession! " .. vim.g.vim_session_filename) end,
+    callback = function()
+        require("neo-tree.command").execute({ action = "close" })
+        vim.cmd("mksession! " .. vim.g.vim_session_filename)
+    end,
 })
 
 -- Highlight when yanking (copying) text
@@ -22,7 +25,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank() end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vim.api.nvim_create_augroup("__formatter__", { clear = true }),
-    command = ":FormatWrite",
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--     group = vim.api.nvim_create_augroup("__formatter__", { clear = true }),
+--     command = ":FormatWrite",
+-- })
