@@ -6,6 +6,13 @@ M.plugin = { -- You can easily change to a different colorscheme.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
     "folke/tokyonight.nvim",
+    opts = {
+        transparent = true,
+        styles = {
+            sidebars = "transparent",
+            floats = "transparent",
+        },
+    },
     priority = 1000, -- make sure to load this before all the other start plugins
     init = function()
         -- Load the colorscheme here.
@@ -15,9 +22,8 @@ M.plugin = { -- You can easily change to a different colorscheme.
 
         -- You can configure highlights by doing something like
         -- vim.cmd.hi("Comment gui=none")
-        vim.cmd.hi("Normal guibg=none")
+        -- vim.cmd.hi("Normal guibg=none")
     end,
 }
 
 return M
-

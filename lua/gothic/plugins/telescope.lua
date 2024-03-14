@@ -47,6 +47,11 @@ M.plugin = { -- Fuzzy Finder (files, lsp, etc)
         local telescope = require("telescope")
         telescope.load_extension("workspaces")
         telescope.setup({
+            pickers = {
+                find_files = {
+                    hidden = true,
+                },
+            },
             -- You can put your default mappings / updates / etc. in here
             --  All the info you're looking for is in `:help telescope.setup()`
             --

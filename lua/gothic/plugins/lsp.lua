@@ -2,6 +2,11 @@ local M = {}
 
 M.plugin = { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
+    -- opts = {
+    --     setup = {
+    --         clangd = function(_, opts) opts.capabilities.offsetEncoding = { "utf-16" } end,
+    --     },
+    -- },
     dependencies = { -- Automatically install LSPs and related tools to stdpath for neovim
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
@@ -152,7 +157,15 @@ M.plugin = { -- LSP Configuration & Plugins
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
             --
-
+            clangd = {
+                cmd = {
+                    "clangd",
+                    "--offset-encoding=utf-16",
+                    "--clang-tidy",
+                    "--background-index",
+                    "--cross-file-rename",
+                },
+            },
             lua_ls = {
                 -- cmd = {...},
                 -- filetypes { ...},
@@ -193,6 +206,7 @@ M.plugin = { -- LSP Configuration & Plugins
         local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
             "stylua", -- Used to format lua code
+            "codelldb",
         })
 
         require("mason-tool-installer").setup({

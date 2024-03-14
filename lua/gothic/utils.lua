@@ -1,5 +1,4 @@
 -- General funcs to use on the fly
-
 local M = {}
 
 M.table_concat = function(t1, t2)
