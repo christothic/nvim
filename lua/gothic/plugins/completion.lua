@@ -37,7 +37,9 @@ M.plugin = { -- Autocompletion
 
         cmp.setup({
             snippet = {
-                expand = function(args) luasnip.lsp_expand(args.body) end,
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end,
             },
             completion = { completeopt = "menu,menuone,noinsert" },
 

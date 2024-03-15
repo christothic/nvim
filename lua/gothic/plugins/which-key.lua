@@ -18,4 +18,3 @@ M.plugin = { -- Useful plugin to show you pending keybinds.
 }
 
 return M
-

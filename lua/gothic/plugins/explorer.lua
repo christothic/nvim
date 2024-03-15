@@ -10,6 +10,7 @@ M.plugin = {
         "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         {
             "s1n7ax/nvim-window-picker",
+            name = "window-picker",
             version = "2.*",
             config = function()
                 require("window-picker").setup({
@@ -49,7 +50,7 @@ M.plugin = {
                 {
                     event = "neo_tree_popup_input_ready",
                     --@param input NuiInput
-                    handler = function(input)
+                    handler = function(_) -- input
                         -- enter input popup with normal mode by default.
                         vim.cmd("stopinsert")
                     end,

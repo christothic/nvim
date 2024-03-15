@@ -6,7 +6,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
         vim.api.nvim_create_user_command("ShowConfigLog", utils.show_startup_floating_window, {})
         if not utils.check_for_workspace() then
             utils.log("workspaces false")
-            vim.defer_fn(function() vim.cmd("Telescope workspaces") end, 1)
+            vim.defer_fn(function()
+                vim.cmd("Telescope workspaces")
+            end, 1)
         end
     end,
 })
@@ -28,7 +30,9 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     group = vim.api.nvim_create_augroup(vim.g.config_username .. "-highlight-yank", { clear = true }),
-    callback = function() vim.highlight.on_yank() end,
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- vim.api.nvim_create_autocmd("BufWritePost", {

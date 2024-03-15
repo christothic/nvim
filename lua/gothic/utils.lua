@@ -8,7 +8,9 @@ M.table_concat = function(t1, t2)
     return t1
 end
 
-M.log = function(message) vim.g.debug_info = vim.list_extend(vim.g.debug_info, { message }) end
+M.log = function(message)
+    vim.g.debug_info = vim.list_extend(vim.g.debug_info, { message })
+end
 
 M.compare_paths = function(path1, path2)
     if path1:sub(-1) == "\\" then path1 = path1:sub(1, -2) end
@@ -27,13 +29,17 @@ M.check_for_workspace = function()
             vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
             if M.compare_paths(arg, path) then
                 vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
-                vim.defer_fn(function() workspaces.open(workspace.name) end, wait_time)
+                vim.defer_fn(function()
+                    workspaces.open(workspace.name)
+                end, wait_time)
                 return true
             end
             ::continue::
         end
         if M.compare_paths(vim.fn.getcwd(), path) then
-            vim.defer_fn(function() workspaces.open(workspace.name) end, wait_time)
+            vim.defer_fn(function()
+                workspaces.open(workspace.name)
+            end, wait_time)
             return true
         end
     end
@@ -50,10 +56,13 @@ M.load_vim_session = function(wait_time)
         if wait_time == nil then
             vim.cmd("source " .. session_file)
         else
-            vim.defer_fn(function() vim.cmd("source " .. session_file) end, wait_time)
+            vim.defer_fn(function()
+                vim.cmd("source " .. session_file)
+            end, wait_time)
         end
     else
-        vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) })
+        vim.g.debug_info =
+            vim.list_extend(vim.g.debug_info, { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) })
     end
     return found
 end

@@ -47,7 +47,9 @@ M.set_default_keys = function()
     -- vim.keymap.set({ "n", "v" }, "<C-r>", "<cmd>redo<CR>", { desc = "Redo" })
 
     -- Undo Tree
-    vim.keymap.set("n", "<leader>u", function() vim.cmd("UndotreeToggle") end, { desc = "Toggle undo tree" })
+    vim.keymap.set("n", "<leader>u", function()
+        vim.cmd("UndotreeToggle")
+    end, { desc = "Toggle undo tree" })
     vim.keymap.set("n", "<leader><F5>", "<cmd>UndotreePersistUndo<CR>", { desc = "Toggle persistant undo tree" })
 
     -- Bar bar
@@ -89,8 +91,18 @@ M.set_telescope_keys = function()
     vim.keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Find definitions" })
     vim.keymap.set("n", "<leader>fi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Find implementations" })
     vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = "Find references" })
-    vim.keymap.set("n", "<leader>fo", "<cmd>Telescope lsp_document_diagnostics<CR>", { desc = "Find document diagnostics" })
-    vim.keymap.set("n", "<leader>fk", "<cmd>Telescope lsp_workspace_diagnostics<CR>", { desc = "Find workspace diagnostics" })
+    vim.keymap.set(
+        "n",
+        "<leader>fo",
+        "<cmd>Telescope lsp_document_diagnostics<CR>",
+        { desc = "Find document diagnostics" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>fk",
+        "<cmd>Telescope lsp_workspace_diagnostics<CR>",
+        { desc = "Find workspace diagnostics" }
+    )
     vim.keymap.set("n", "<leader>fw", "<cmd>Telescope workspaces<CR>", { desc = "Find workspaces" })
     vim.keymap.set("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { desc = "Find quickfix" })
     vim.keymap.set("n", "<leader>fl", "<cmd>Telescope loclist<CR>", { desc = "Find loclist" })
@@ -115,20 +127,17 @@ M.set_telescope_keys = function()
     end, { desc = "Find in current buffer" })
     -- Also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set(
-        "n",
-        "<leader>f<leader>",
-        function()
-            builtin.live_grep({
-                grep_open_files = true,
-                prompt_title = "Find in Open Files",
-            })
-        end,
-        { desc = "Find in Open Files" }
-    )
+    vim.keymap.set("n", "<leader>f<leader>", function()
+        builtin.live_grep({
+            grep_open_files = true,
+            prompt_title = "Find in Open Files",
+        })
+    end, { desc = "Find in Open Files" })
     -- Shortcut for searching your neovim configuration files
     -- vim.keymap.set("n", "<leader>fn", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find in neovim files" })
-    vim.keymap.set("n", "<leader>fv", function() builtin.find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find in neovim files" })
+    vim.keymap.set("n", "<leader>fv", function()
+        builtin.find_files({ cwd = vim.fn.stdpath("config") })
+    end, { desc = "Find in neovim files" })
 end
 
 M.set_commenter_keys = function() end

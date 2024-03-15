@@ -8,4 +8,3 @@ M.plugin = {
 }
 
 return M
-
