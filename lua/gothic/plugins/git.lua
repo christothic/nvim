@@ -1,5 +1,9 @@
 local M = {}
-M.plugin = {}
+M.plugin = {
+    "airblade/vim-gitgutter",
+    config = function() end,
+    opts = {},
+}
 return M
 
 -- mkdir -p ~/.vim/pack/tpope/start

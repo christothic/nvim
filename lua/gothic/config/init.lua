@@ -1,6 +1,7 @@
 vim.g.vim_session_filename = ".vimsession"
 vim.g.debug_info = { "Debug Info: " }
 
+vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
@@ -13,7 +14,7 @@ vim.opt.scrolloff = 20
 -- vim.opt.tabstop = 4
 -- vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.smarttab = true
+vim.opt.smarttab = false
 -- vim.opt.expandtab = true
 
 vim.opt.cursorline = true

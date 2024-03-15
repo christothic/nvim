@@ -8,23 +8,53 @@ M.table_concat = function(t1, t2)
     return t1
 end
 
+M.log = function(message) vim.g.debug_info = vim.list_extend(vim.g.debug_info, { message }) end
+
+M.compare_paths = function(path1, path2)
+    if path1:sub(-1) == "\\" then path1 = path1:sub(1, -2) end
+    if path2:sub(-1) == "\\" then path2 = path2:sub(1, -2) end
+    return path1 == path2
+end
+
+M.check_for_workspace = function()
+    vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Args " .. vim.inspect(vim.v.argv) })
+    local workspaces = require("workspaces")
+    for _, workspace in ipairs(workspaces.get()) do
+        local path = workspace.path
+        local wait_time = 1
+        for i, arg in pairs(vim.v.argv) do
+            if i == 1 or i == 2 then goto continue end
+            vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
+            if M.compare_paths(arg, path) then
+                vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
+                vim.defer_fn(function() workspaces.open(workspace.name) end, wait_time)
+                return true
+            end
+            ::continue::
+        end
+        if M.compare_paths(vim.fn.getcwd(), path) then
+            vim.defer_fn(function() workspaces.open(workspace.name) end, wait_time)
+            return true
+        end
+    end
+    return false
+end
+
 M.load_vim_session = function(wait_time)
-    local debug_info = vim.g.debug_info
     local session_file = vim.g.vim_session_filename
     local f = io.open(session_file, "r")
     local found = f ~= nil
     if found then
         io.close(f)
-        table.insert(debug_info, "Found " .. session_file)
+        vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Found " .. session_file })
         if wait_time == nil then
             vim.cmd("source " .. session_file)
         else
             vim.defer_fn(function() vim.cmd("source " .. session_file) end, wait_time)
         end
     else
-        table.insert(debug_info, "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()))
+        vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) })
     end
-    vim.g.debug_info = debug_info
     return found
 end
 
@@ -50,13 +80,11 @@ M.show_startup_floating_window = function()
 end
 
 M.log_current_buffers = function()
-    local debug_info = vim.g.debug_info
     local buffer_to_close = nil
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         local buf_name = vim.api.nvim_buf_get_name(buf)
         local is_listed = vim.api.nvim_buf_get_option(buf, "buflisted")
-        table.insert(
-            debug_info,
+        vim.g.debug_info = vim.list_extend(vim.g.debug_info, {
             "Buf Num: "
                 .. buf
                 .. ", Buf Name: "
@@ -66,12 +94,11 @@ M.log_current_buffers = function()
                 .. ", t: "
                 .. tostring(vim.bo[buf].readonly)
                 .. ", cwd?: "
-                .. tostring(buf_name == vim.fn.getcwd())
-        )
+                .. tostring(buf_name == vim.fn.getcwd()),
+        })
         if buf_name == vim.fn.getcwd() then buffer_to_close = buf end
     end
     if buffer_to_close then vim.api.nvim_buf_delete(buffer_to_close, { force = true }) end
-    vim.g.debug_info = debug_info
 end
 
 return M

@@ -49,7 +49,7 @@ M.plugin = { -- Fuzzy Finder (files, lsp, etc)
         telescope.setup({
             pickers = {
                 find_files = {
-                    hidden = true,
+                    -- hidden = true,
                 },
             },
             -- You can put your default mappings / updates / etc. in here

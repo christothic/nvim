@@ -9,10 +9,9 @@ M.plugin = {
             hooks = {
                 open = {
                     function()
-                        -- if not vim.g.user_utils.load_vim_session() then vim.cmd("Telescope find_files") end
+                        vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Opened workpace " })
                         vim.g.user_utils.load_vim_session()
                     end,
-                    "Telescope find_files",
                 },
             },
         })

@@ -2,26 +2,12 @@ local utils = vim.g.user_utils
 
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
-        local workspaces = require("workspaces")
-        print("Current dir " .. vim.fn.getcwd())
-        for _, workspace in ipairs(workspaces.get()) do
-            local path = workspace.path
-            local last_char = path:sub(-1)
-            if last_char == "\\" then
-                -- print("last_char " .. last_char)
-                path = path:sub(1, -2)
-            end
-
-            print("workspace path: " .. path)
-            if vim.fn.getcwd() == path then
-                local wait_time = 50
-                if not utils.load_vim_session(wait_time) then vim.defer_fn(function() vim.cmd("Telescope workspaces") end, wait_time) end
-                break
-            end
-        end
-
         utils.log_current_buffers()
         vim.api.nvim_create_user_command("ShowConfigLog", utils.show_startup_floating_window, {})
+        if not utils.check_for_workspace() then
+            utils.log("workspaces false")
+            vim.defer_fn(function() vim.cmd("Telescope workspaces") end, 1)
+        end
     end,
 })
 
