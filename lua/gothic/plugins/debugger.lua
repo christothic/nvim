@@ -41,8 +41,6 @@ M.plugin = {
 
 return M
 
--- local M = {}
-
 -- M.dap = {
 --   plugin = true,
 --   n = {
@@ -56,5 +54,3 @@ return M
 --     }
 --   }
 -- }
-
--- return M
