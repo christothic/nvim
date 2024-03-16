@@ -9,11 +9,18 @@ M.plugin = {
         "MunifTanjim/nui.nvim",
         "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         {
+            -- "s1n7ax/nvim-window-picker",
+            -- name = "window-picker",
+            -- event = "VeryLazy",
+            -- version = "2.*",
+            -- config = function()
+            --     require("window-picker").setup()
+            -- end,
             "s1n7ax/nvim-window-picker",
-            name = "window-picker",
+            -- name = "window-picker",
             version = "2.*",
             config = function()
-                require("window-picker").setup({
+                require("nvim-window-picker").setup({
                     filter_rules = {
                         include_current_win = false,
                         autoselect_one = true,
@@ -149,7 +156,9 @@ M.plugin = {
             commands = {},
             window = {
                 position = "left",
-                width = 30,
+                width = function()
+                    return vim.o.columns * 0.35
+                end,
                 mapping_options = {
                     noremap = true,
                     nowait = true,

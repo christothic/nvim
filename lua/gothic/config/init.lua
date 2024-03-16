@@ -33,6 +33,15 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- undo tree
 vim.g.undotree_SetFocusWhenToggle = 1
 
+-- terminal stuff
+vim.opt.shell = vim.fn.executable("pwsh") and "pwsh" or "powershell"
+vim.opt.shellcmdflag =
+    "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
+
 local user = vim.g.config_username
 local config = user .. ".config"
 vim.g.user_keymaps = require(config .. ".keymaps")
