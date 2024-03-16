@@ -59,7 +59,7 @@ M.set_default_keys = function()
     vim.keymap.set("n", "<leader>q", "<cmd>BufferClose<CR>", { desc = "Quit Current Buffer" })
 
     -- Terminal stuff
-    vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
+    -- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
     vim.keymap.set("n", "<leader>ot", "<cmd>ToggleTerm<CR>", { desc = "Open new terminal" })
 
     -- Manage keys
