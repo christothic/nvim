@@ -9,7 +9,17 @@ M.plugin = {
         require("nvim-treesitter.install").prefer_git = true
         local ts = require("nvim-treesitter.configs")
         ts.setup({
-            ensure_installed = { "bash", "c", "cpp", "html", "lua", "markdown", "vim", "vimdoc", "query" },
+            ensure_installed = {
+                "bash",
+                "c",
+                "cpp",
+                "html",
+                "lua",
+                "markdown",
+                "vim",
+                "vimdoc",
+                "query",
+            },
             auto_install = true,
             highlight = { enable = true },
             indent = { enable = true },

@@ -80,20 +80,36 @@ M.plugin = { -- LSP Configuration & Plugins
 
                 -- Jump to the implementation of the word under your cursor.
                 --  Useful when your language has ways of declaring types without an actual implementation.
-                map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+                map(
+                    "gI",
+                    require("telescope.builtin").lsp_implementations,
+                    "[G]oto [I]mplementation"
+                )
 
                 -- Jump to the type of the word under your cursor.
                 --  Useful when you're not sure what type a variable is and you want to see
                 --  the definition of its *type*, not where it was *defined*.
-                map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+                map(
+                    "<leader>D",
+                    require("telescope.builtin").lsp_type_definitions,
+                    "Type [D]efinition"
+                )
 
                 -- Fuzzy find all the symbols in your current document.
                 --  Symbols are things like variables, functions, types, etc.
-                map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+                map(
+                    "<leader>ds",
+                    require("telescope.builtin").lsp_document_symbols,
+                    "[D]ocument [S]ymbols"
+                )
 
                 -- Fuzzy find all the symbols in your current workspace
                 --  Similar to document symbols, except searches over your whole project.
-                map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+                map(
+                    "<leader>ws",
+                    require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                    "[W]orkspace [S]ymbols"
+                )
 
                 -- Rename the variable under your cursor
                 --  Most Language Servers support renaming across files, etc.
@@ -136,7 +152,11 @@ M.plugin = { -- LSP Configuration & Plugins
         --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
         --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+        capabilities = vim.tbl_deep_extend(
+            "force",
+            capabilities,
+            require("cmp_nvim_lsp").default_capabilities()
+        )
 
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -182,7 +202,10 @@ M.plugin = { -- LSP Configuration & Plugins
                             checkThirdParty = false,
                             -- Tells lua_ls where to find all the Lua files that you have loaded
                             -- for your neovim configuration.
-                            library = { "${3rd}/luv/library", unpack(vim.api.nvim_get_runtime_file("", true)) },
+                            library = {
+                                "${3rd}/luv/library",
+                                unpack(vim.api.nvim_get_runtime_file("", true)),
+                            },
                             -- If lua_ls is really slow on your computer, you can try this instead:
                             -- library = { vim.env.VIMRUNTIME },
                         },
@@ -223,7 +246,8 @@ M.plugin = { -- LSP Configuration & Plugins
                     -- This handles overriding only values explicitly passed
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
-                    server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                    server.capabilities =
+                        vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
                     require("lspconfig")[server_name].setup(server)
                 end,
             },

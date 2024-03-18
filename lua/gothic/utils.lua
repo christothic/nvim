@@ -26,9 +26,11 @@ M.check_for_workspace = function()
         local wait_time = 1
         for i, arg in pairs(vim.v.argv) do
             if i == 1 or i == 2 then goto continue end
-            vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
+            vim.g.debug_info =
+                vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
             if M.compare_paths(arg, path) then
-                vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
+                vim.g.debug_info =
+                    vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
                 vim.defer_fn(function()
                     workspaces.open(workspace.name)
                 end, wait_time)
@@ -61,8 +63,10 @@ M.load_vim_session = function(wait_time)
             end, wait_time)
         end
     else
-        vim.g.debug_info =
-            vim.list_extend(vim.g.debug_info, { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) })
+        vim.g.debug_info = vim.list_extend(
+            vim.g.debug_info,
+            { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) }
+        )
     end
     return found
 end
@@ -93,18 +97,14 @@ M.log_current_buffers = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         local buf_name = vim.api.nvim_buf_get_name(buf)
         local is_listed = vim.api.nvim_buf_get_option(buf, "buflisted")
-        vim.g.debug_info = vim.list_extend(vim.g.debug_info, {
-            "Buf Num: "
-                .. buf
-                .. ", Buf Name: "
-                .. buf_name
-                .. ", Listed: "
-                .. tostring(is_listed)
-                .. ", t: "
-                .. tostring(vim.bo[buf].readonly)
-                .. ", cwd?: "
-                .. tostring(buf_name == vim.fn.getcwd()),
-        })
+        vim.g.debug_info =
+            vim.list_extend(vim.g.debug_info, {
+                "Buf Num: " .. buf .. ", Buf Name: " .. buf_name .. ", Listed: " .. tostring(
+                    is_listed
+                ) .. ", t: " .. tostring(vim.bo[buf].readonly) .. ", cwd?: " .. tostring(
+                    buf_name == vim.fn.getcwd()
+                ),
+            })
         if buf_name == vim.fn.getcwd() then buffer_to_close = buf end
     end
     if buffer_to_close then vim.api.nvim_buf_delete(buffer_to_close, { force = true }) end

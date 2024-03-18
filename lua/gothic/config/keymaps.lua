@@ -4,15 +4,36 @@ M.set_default_keys = function()
     vim.g.mapleader = " "
     vim.g.maplocalleader = " "
     vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+    vim.keymap.set(
+        "n",
+        "<leader>re",
+        "ye:%s/<C-r>0//g<Left><Left>",
+        { desc = "Replace next end of word" }
+    )
+    -- vim.keymap.set("n", "<leader>rW", "yW:%s/<C-r>0//g<Left><Left>", { desc = "Replace WORD" })
+    vim.keymap.set(
+        "n",
+        "<leader>rie",
+        "yie:%s/<C-r>0//g<Left><Left>",
+        { desc = "Replace inside word" }
+    )
+    -- vim.keymap.set(
+    --     "n",
+    --     "<leader>rie",
+    --     "yiW:%s/<C-r>0//g<Left><Left>",
+    --     { desc = "Replace inside WORD" }
+    -- )
+    -- vim.keymap.set("n", "<leader>riW", "yiW:%s/<C-r>0//g<Left><Left>", { desc = "Replace inside WORD" })
+
     -- TIP: Disable arrow keys in normal mode
     -- vim.keymap.set('i', '<C-h>', '<Left>')
     -- vim.keymap.set('i', '<C-l>', '<right>')
     -- vim.keymap.set('i', '<C-k>', '<up>')
     -- vim.keymap.set('i', '<C-j>', '<down>')
-    vim.keymap.set({ "n", "v" }, "<left>", '<cmd>echo "Use h to move!!"<CR>')
-    vim.keymap.set({ "n", "v" }, "<right>", '<cmd>echo "Use l to move!!"<CR>')
-    vim.keymap.set({ "n", "v" }, "<up>", '<cmd>echo "Use k to move!!"<CR>')
-    vim.keymap.set({ "n", "v" }, "<down>", '<cmd>echo "Use j to move!!"<CR>')
+    vim.keymap.set({ "n", "v" }, "<left>", "<cmd>echo 'Use h to move!!'<CR>")
+    vim.keymap.set({ "n", "v" }, "<right>", "<cmd>echo 'Use l to move!!'<CR>")
+    vim.keymap.set({ "n", "v" }, "<up>", "<cmd>echo 'Use k to move!!'<CR>")
+    vim.keymap.set({ "n", "v" }, "<down>", "<cmd>echo 'Use j to move!!'<CR>")
 
     -- Undo breaks
     vim.keymap.set("i", "<Space>", "<Space><C-g>u")
@@ -50,7 +71,12 @@ M.set_default_keys = function()
     vim.keymap.set("n", "<leader>u", function()
         vim.cmd("UndotreeToggle")
     end, { desc = "Toggle undo tree" })
-    vim.keymap.set("n", "<leader><F5>", "<cmd>UndotreePersistUndo<CR>", { desc = "Toggle persistant undo tree" })
+    vim.keymap.set(
+        "n",
+        "<leader><F5>",
+        "<cmd>UndotreePersistUndo<CR>",
+        { desc = "Toggle persistant undo tree" }
+    )
 
     -- Bar bar
     vim.keymap.set("n", "<tab>", "<Cmd>BufferNext<CR>", { desc = "Next buffer" })
@@ -83,14 +109,39 @@ M.set_telescope_keys = function()
     end, { desc = "Files grep" })
     vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffers" })
     vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Find help tags" })
-    vim.keymap.set("n", "<leader>fc", "<cmd>Telescope neoclip<CR>", { desc = "Find clipboard history" })
+    vim.keymap.set(
+        "n",
+        "<leader>fc",
+        "<cmd>Telescope neoclip<CR>",
+        { desc = "Find clipboard history" }
+    )
     vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Find recent files" })
-    vim.keymap.set("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Find symbols" })
+    vim.keymap.set(
+        "n",
+        "<leader>fs",
+        "<cmd>Telescope lsp_document_symbols<CR>",
+        { desc = "Find symbols" }
+    )
     vim.keymap.set("n", "<leader>ft", "<cmd>Telescope treesitter<CR>", { desc = "Find treesitter" })
     vim.keymap.set("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
-    vim.keymap.set("n", "<leader>fd", "<cmd>Telescope lsp_definitions<CR>", { desc = "Find definitions" })
-    vim.keymap.set("n", "<leader>fi", "<cmd>Telescope lsp_implementations<CR>", { desc = "Find implementations" })
-    vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = "Find references" })
+    vim.keymap.set(
+        "n",
+        "<leader>fd",
+        "<cmd>Telescope lsp_definitions<CR>",
+        { desc = "Find definitions" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>fi",
+        "<cmd>Telescope lsp_implementations<CR>",
+        { desc = "Find implementations" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>fr",
+        "<cmd>Telescope lsp_references<CR>",
+        { desc = "Find references" }
+    )
     vim.keymap.set(
         "n",
         "<leader>fo",
