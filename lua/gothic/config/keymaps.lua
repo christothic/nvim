@@ -6,24 +6,29 @@ M.set_default_keys = function()
     vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
     vim.keymap.set(
         "n",
+        "<leader>rb",
+        "yb:%s/<C-r>0//g<Left><Left>",
+        { desc = "Replace previous word" }
+    )
+    vim.keymap.set(
+        "n",
         "<leader>re",
         "ye:%s/<C-r>0//g<Left><Left>",
         { desc = "Replace next end of word" }
     )
-    -- vim.keymap.set("n", "<leader>rW", "yW:%s/<C-r>0//g<Left><Left>", { desc = "Replace WORD" })
     vim.keymap.set(
         "n",
-        "<leader>rie",
-        "yie:%s/<C-r>0//g<Left><Left>",
-        { desc = "Replace inside word" }
+        "<leader>rw",
+        "yiw:%s/<C-r>0//g<Left><Left>",
+        { desc = "Replace inner word" }
     )
-    -- vim.keymap.set(
-    --     "n",
-    --     "<leader>rie",
-    --     "yiW:%s/<C-r>0//g<Left><Left>",
-    --     { desc = "Replace inside WORD" }
-    -- )
-    -- vim.keymap.set("n", "<leader>riW", "yiW:%s/<C-r>0//g<Left><Left>", { desc = "Replace inside WORD" })
+    vim.keymap.set(
+        "n",
+        "<leader>rW",
+        "yiW:%s/<C-r>0//g<Left><Left>",
+        { desc = "Replace inner WORD" }
+    )
+    vim.keymap.set("v", "<leader>r", "y:%s/<C-r>0//g<Left><Left>", { desc = "Replace selection" })
 
     -- TIP: Disable arrow keys in normal mode
     -- vim.keymap.set('i', '<C-h>', '<Left>')
