@@ -10,6 +10,7 @@ M.plugin = { -- Autoformat
         },
         formatters_by_ft = {
             lua = { "stylua" },
+            -- py = { "black" },
             -- h = { "asp-grep" },
             -- cpp = { "asp-grep" },
             -- h = { "clang-format" },

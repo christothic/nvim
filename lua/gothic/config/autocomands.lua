@@ -44,12 +44,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    pattern = "SConstruct",
+    -- pattern = "SConstruct",
     callback = function()
-        print("scons file")
+        -- print("scons file")
         -- if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
-        local buf = vim.api.nvim_get_current_buf()
-        vim.api.nvim_buf_set_option(buf, "filetype", "python")
+        -- local buf = vim.api.nvim_get_current_buf()
+        -- vim.api.nvim_buf_set_option(buf, "filetype", "python")
         -- end
     end,
 })

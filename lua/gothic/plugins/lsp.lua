@@ -180,6 +180,16 @@ M.plugin = { -- LSP Configuration & Plugins
             -- But for many setups, the LSP (`tsserver`) will work just fine
             -- tsserver = {},
             --
+
+            -- pylsp = {
+            --     plugins = {
+            --         pycodestyle = {
+            --             ignore = { "E501" },
+            --             maxLineLength = 88,
+            --         },
+            --     },
+            -- },
+
             clangd = {
                 cmd = {
                     "clangd",
