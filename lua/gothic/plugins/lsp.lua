@@ -199,6 +199,11 @@ M.plugin = { -- LSP Configuration & Plugins
                     "--cross-file-rename",
                 },
             },
+            rust_analyzer = {},
+            gdtoolkit = {},
+            pyright = {},
+            stylua = {}, -- Used to format lua code
+            codelldb = {},
             lua_ls = {
                 -- cmd = {...},
                 -- filetypes { ...},
@@ -240,10 +245,8 @@ M.plugin = { -- LSP Configuration & Plugins
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
         local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-            "stylua", -- Used to format lua code
-            "codelldb",
-        })
+        -- vim.list_extend(ensure_installed, {
+        -- })
 
         require("mason-tool-installer").setup({
             ensure_installed = ensure_installed,

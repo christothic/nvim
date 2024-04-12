@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
         if not utils.check_for_workspace() then
             utils.log("workspaces false")
             vim.defer_fn(function()
-                vim.cmd("Telescope workspaces")
+ --               vim.cmd("Telescope workspaces")
             end, 1)
         end
     end,
