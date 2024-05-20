@@ -1,3 +1,4 @@
+local utils = vim.g.user_utils
 local M = {}
 
 M.set_default_keys = function()
@@ -35,10 +36,31 @@ M.set_default_keys = function()
     -- vim.keymap.set('i', '<C-l>', '<right>')
     -- vim.keymap.set('i', '<C-k>', '<up>')
     -- vim.keymap.set('i', '<C-j>', '<down>')
-    vim.keymap.set({ "n", "v" }, "<left>", "<cmd>echo 'Use h to move!!'<CR>")
-    vim.keymap.set({ "n", "v" }, "<right>", "<cmd>echo 'Use l to move!!'<CR>")
-    vim.keymap.set({ "n", "v" }, "<up>", "<cmd>echo 'Use k to move!!'<CR>")
-    vim.keymap.set({ "n", "v" }, "<down>", "<cmd>echo 'Use j to move!!'<CR>")
+
+    vim.keymap.set(
+        { "n", "v" },
+        "<leader>ow",
+        "<cmd>vs<CR>",
+        { desc = "Split current file vertically" }
+    )
+    vim.keymap.set({ "n", "v" }, '<leader>"', 'ci"', { desc = 'Change inside " string' })
+    vim.keymap.set({ "n", "v" }, "<leader>'", "ci'", { desc = "Change inside ' string" })
+    -- vim.keymap.set("n", '<leader>o"', 'yi":vs <C-r>', { desc = "Replace inner WORD" })
+    vim.keymap.set("n", '<leader>o"', function()
+        -- vim.cmd('yi"')
+        utils.send({ "y", "i", '"' })
+        vim.defer_fn(function()
+            local cwd = vim.fn.expand("%:p")
+            local dashtr = vim.fn.has("win32") and "\\" or "/"
+            local path = cwd:sub(1, cwd:find(dashtr .. "[^" .. dashtr .. "]*$"))
+                .. vim.fn.getreg('"'):gsub("/", dashtr)
+            if utils.does_file_exists(path) then vim.cmd("vs " .. path) end
+        end, 1)
+    end, { desc = "Replace inner WORD" })
+    -- vim.keymap.set({ "n", "v" }, "<left>", "<cmd>echo 'Use h to move!!'<CR>")
+    -- vim.keymap.set({ "n", "v" }, "<right>", "<cmd>echo 'Use l to move!!'<CR>")
+    -- vim.keymap.set({ "n", "v" }, "<up>", "<cmd>echo 'Use k to move!!'<CR>")
+    -- vim.keymap.set({ "n", "v" }, "<down>", "<cmd>echo 'Use j to move!!'<CR>")
 
     -- Undo breaks
     vim.keymap.set("i", "<Space>", "<Space><C-g>u")
@@ -64,10 +86,10 @@ M.set_default_keys = function()
     -- vim.keymap.set("i", "kk", "<ESC>kl", { desc = "Exit insert mode", noremap = false })
     -- vim.keymap.set("i", "hh", "<ESC>hh", { desc = "Exit insert mode", noremap = false })
     -- vim.keymap.set("i", "ll", "<ESC>ll", { desc = "Exit insert mode", noremap = false })
-    vim.keymap.set({ "n", "v" }, "<C-z>", "<cmd>u<CR>", { desc = "Undo" })
+    -- vim.keymap.set({ "n", "v" }, "<C-z>", "<cmd><ESC><CR>", { desc = "Undo" })
     -- vim.keymap.set({ "n", "v" }, "<C-S-Z>", "<cmd>redo<CR>", { desc = "Redo" })
     -- vim.keymap.set({ "n", "v" }, "<C-S-z>", "<cmd>redo<CR>", { desc = "Redo" })
-    vim.keymap.set({ "n", "v" }, "<M-z>", "<cmd>redo<CR>", { desc = "Redo" })
+    -- vim.keymap.set({ "n", "v" }, "<M-z>", "<cmd>redo<CR>", { desc = "Redo" })
     -- vim.keymap.set({ "n", "v" }, "<C-M-Z>", "<cmd>redo<CR>", { desc = "Redo" })
     -- vim.keymap.set({ "n", "v" }, "<C-Z>", "<cmd>redo<CR>", { desc = "Redo" })
     -- vim.keymap.set({ "n", "v" }, "<C-r>", "<cmd>redo<CR>", { desc = "Redo" })

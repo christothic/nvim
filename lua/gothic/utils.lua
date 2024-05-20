@@ -18,6 +18,12 @@ M.compare_paths = function(path1, path2)
     return path1 == path2
 end
 
+function M.send(keys)
+    for _, key in pairs(keys) do
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), "n", true)
+    end
+end
+
 M.check_for_workspace = function()
     vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Args " .. vim.inspect(vim.v.argv) })
     local workspaces = require("workspaces")
@@ -46,6 +52,13 @@ M.check_for_workspace = function()
         end
     end
     return false
+end
+
+M.does_file_exists = function(path)
+    local f = io.open(path, "r")
+    local found = f ~= nil
+    if found then io.close(f) end
+    return found
 end
 
 M.load_vim_session = function(wait_time)

@@ -49,6 +49,12 @@ M.plugin = { -- Fuzzy Finder (files, lsp, etc)
         local telescope = require("telescope")
         telescope.load_extension("workspaces")
         telescope.setup({
+            defaults = {
+                file_ignore_patterns = {
+                    ".git",
+                    -- "git",
+                },
+            },
             pickers = {
                 find_files = {
                     -- hidden = true,
