@@ -46,17 +46,43 @@ M.set_default_keys = function()
     vim.keymap.set({ "n", "v" }, '<leader>"', 'ci"', { desc = 'Change inside " string' })
     vim.keymap.set({ "n", "v" }, "<leader>'", "ci'", { desc = "Change inside ' string" })
     -- vim.keymap.set("n", '<leader>o"', 'yi":vs <C-r>', { desc = "Replace inner WORD" })
-    vim.keymap.set("n", '<leader>o"', function()
-        -- vim.cmd('yi"')
-        utils.send({ "y", "i", '"' })
+
+    vim.keymap.set("n", "<leader>ofv", function()
+        vim.fn.setreg("0", "")
+        utils.send('yi"')
         vim.defer_fn(function()
-            local cwd = vim.fn.expand("%:p")
-            local dashtr = vim.fn.has("win32") and "\\" or "/"
-            local path = cwd:sub(1, cwd:find(dashtr .. "[^" .. dashtr .. "]*$"))
-                .. vim.fn.getreg('"'):gsub("/", dashtr)
-            if utils.does_file_exists(path) then vim.cmd("vs " .. path) end
+            if vim.fn.getreg("0") == "" then utils.send("yi<") end
+            vim.defer_fn(function()
+                if vim.fn.getreg("0") == "" then return end
+                vim.defer_fn(function()
+                    local cwd = vim.fn.expand("%:p")
+                    local dashtr = vim.fn.has("win32") and "\\" or "/"
+                    local path = cwd:sub(1, cwd:find(dashtr .. "[^" .. dashtr .. "]*$"))
+                        .. vim.fn.getreg("0"):gsub("/", dashtr)
+                    if utils.does_file_exists(path) then
+                        vim.cmd("vs " .. path)
+                    else
+                        vim.cmd("vs")
+                        vim.cmd("Telescope find_files")
+                        utils.send(vim.fn.getreg("0"):gsub("/", ""))
+                    end
+                end, 1)
+            end, 1)
         end, 1)
-    end, { desc = "Replace inner WORD" })
+        -- vim.defer_fn(function()
+        --     local cwd = vim.fn.expand("%:p")
+        --     local dashtr = vim.fn.has("win32") and "\\" or "/"
+        --     local path = cwd:sub(1, cwd:find(dashtr .. "[^" .. dashtr .. "]*$"))
+        --         .. vim.fn.getreg("0"):gsub("/", dashtr)
+        --     if utils.does_file_exists(path) then
+        --         vim.cmd("vs " .. path)
+        --     else
+        --         vim.cmd("vs")
+        --         vim.cmd("Telescope find_files")
+        --         utils.send(vim.fn.getreg("0"):gsub("/", ""))
+        --     end
+        -- end, 1)
+    end, { desc = "Split file under cursor vertically" })
     -- vim.keymap.set({ "n", "v" }, "<left>", "<cmd>echo 'Use h to move!!'<CR>")
     -- vim.keymap.set({ "n", "v" }, "<right>", "<cmd>echo 'Use l to move!!'<CR>")
     -- vim.keymap.set({ "n", "v" }, "<up>", "<cmd>echo 'Use k to move!!'<CR>")
@@ -78,6 +104,7 @@ M.set_default_keys = function()
     vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
     vim.keymap.set("i", "<C-s>", "<cmd>w<CR><ESC>", { desc = "Save file" })
     vim.keymap.set("i", "<C-z>", "<ESC>", { desc = "Exit insert mode" })
+
     -- vim.keymap.set("i", "<c-j>", "j", { desc = "Exit insert mode" })
     -- vim.keymap.set("i", "<c-k>", "k", { desc = "Exit insert mode" })
     -- vim.keymap.set("i", "<c-h>", "h", { desc = "Exit insert mode" })

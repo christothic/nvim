@@ -1,3 +1,4 @@
+local utils = vim.g.user_utils
 -- Plugin load logic
 
 local M = {}
@@ -42,11 +43,9 @@ M.init = function()
     local user = vim.g.config_username
     local plugins_path = "lua/" .. user .. "/plugins/*.lua"
     local files = vim.api.nvim_get_runtime_file(plugins_path, true)
-    -- print(vim.inspect(vim.g.debug_info)
     for _, file in ipairs(files) do
-        vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "loading: " .. file })
-        table.insert(M.plugins, dofile(file).plugin)
-        -- vim.list_extend(M.plugins, dofile(file).plugin)
+        utils.log("loading: " .. file)
+        M.plugins[#M.plugins + 1] = dofile(file).plugin
     end
     require("lazy").setup(M.plugins, M.opts)
 end

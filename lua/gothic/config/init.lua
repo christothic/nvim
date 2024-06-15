@@ -1,5 +1,4 @@
 vim.g.vim_session_filename = ".vimsession"
-vim.g.debug_info = { "Debug Info: " }
 
 vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true

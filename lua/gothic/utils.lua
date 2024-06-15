@@ -1,6 +1,8 @@
 -- General funcs to use on the fly
 local M = {}
 
+local debug_info = { "Debug Info" }
+
 M.table_concat = function(t1, t2)
     for i = 1, #t2 do
         t1[#t1 + 1] = t2[i]
@@ -9,7 +11,7 @@ M.table_concat = function(t1, t2)
 end
 
 M.log = function(message)
-    vim.g.debug_info = vim.list_extend(vim.g.debug_info, { message })
+    debug_info[#debug_info + 1] = message
 end
 
 M.compare_paths = function(path1, path2)
@@ -19,24 +21,33 @@ M.compare_paths = function(path1, path2)
 end
 
 function M.send(keys)
-    for _, key in pairs(keys) do
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), "n", true)
+    for c in string.gmatch(tostring(keys), ".") do
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(c, true, false, true), "n", true)
     end
 end
 
+function M.split_string(inputstr, sep)
+    if sep == nil then sep = "%s" end
+    local t = {}
+    for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+        table.insert(t, str)
+    end
+    return t
+end
+
 M.check_for_workspace = function()
-    vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Args " .. vim.inspect(vim.v.argv) })
+    -- vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Args " .. vim.inspect(vim.v.argv) })
     local workspaces = require("workspaces")
     for _, workspace in ipairs(workspaces.get()) do
         local path = workspace.path
         local wait_time = 1
         for i, arg in pairs(vim.v.argv) do
             if i == 1 or i == 2 then goto continue end
-            vim.g.debug_info =
-                vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
+            -- vim.g.debug_info =
+            --     vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
             if M.compare_paths(arg, path) then
-                vim.g.debug_info =
-                    vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
+                -- vim.g.debug_info =
+                -- vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
                 vim.defer_fn(function()
                     workspaces.open(workspace.name)
                 end, wait_time)
@@ -67,7 +78,7 @@ M.load_vim_session = function(wait_time)
     local found = f ~= nil
     if found then
         io.close(f)
-        vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Found " .. session_file })
+        -- vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Found " .. session_file })
         if wait_time == nil then
             vim.cmd("source " .. session_file)
         else
@@ -76,17 +87,17 @@ M.load_vim_session = function(wait_time)
             end, wait_time)
         end
     else
-        vim.g.debug_info = vim.list_extend(
-            vim.g.debug_info,
-            { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) }
-        )
+        -- vim.g.debug_info = vim.list_extend(
+        --     vim.g.debug_info,
+        --     { "no " .. session_file .. " on " .. tostring(vim.fn.getcwd()) }
+        -- )
     end
     return found
 end
 
 M.show_startup_floating_window = function()
     local buffer = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_lines(buffer, 0, -1, false, vim.g.debug_info)
+    vim.api.nvim_buf_set_lines(buffer, 0, -1, false, debug_info)
     local width = vim.api.nvim_get_option("columns")
     local height = vim.api.nvim_get_option("lines")
     local win_height = math.ceil(height * 0.8)
@@ -110,14 +121,14 @@ M.log_current_buffers = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         local buf_name = vim.api.nvim_buf_get_name(buf)
         local is_listed = vim.api.nvim_buf_get_option(buf, "buflisted")
-        vim.g.debug_info =
-            vim.list_extend(vim.g.debug_info, {
-                "Buf Num: " .. buf .. ", Buf Name: " .. buf_name .. ", Listed: " .. tostring(
-                    is_listed
-                ) .. ", t: " .. tostring(vim.bo[buf].readonly) .. ", cwd?: " .. tostring(
-                    buf_name == vim.fn.getcwd()
-                ),
-            })
+        -- vim.g.debug_info =
+        --     vim.list_extend(vim.g.debug_info, {
+        --         "Buf Num: " .. buf .. ", Buf Name: " .. buf_name .. ", Listed: " .. tostring(
+        --             is_listed
+        --         ) .. ", t: " .. tostring(vim.bo[buf].readonly) .. ", cwd?: " .. tostring(
+        --             buf_name == vim.fn.getcwd()
+        --         ),
+        --     })
         if buf_name == vim.fn.getcwd() then buffer_to_close = buf end
     end
     if buffer_to_close then vim.api.nvim_buf_delete(buffer_to_close, { force = true }) end
