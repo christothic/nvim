@@ -189,6 +189,9 @@ M.plugin = { -- LSP Configuration & Plugins
             --         },
             --     },
             -- },
+            cssls = {
+                capabilities = capabilities,
+            },
 
             clangd = {
                 cmd = {
@@ -199,11 +202,28 @@ M.plugin = { -- LSP Configuration & Plugins
                     "--cross-file-rename",
                 },
             },
+            bashls = {},
+            -- ◍ bash-language-server bashls
+            -- ◍ beautysh
+            -- ◍ biome
+            -- ◍ clangd
+            -- ◍ codelldb
+            -- ◍ gdtoolkit
+            -- ◍ js-debug-adapter
+            -- ◍ prettierd
+            -- ◍ pyright
+            -- ◍ rust-analyzer rust_analyzer
+            -- ◍ shellharden
+            -- ◍ stylelint
+            -- ◍ typescript-language-server tsserver
+            biome = {},
+            tsserver = {},
             rust_analyzer = {},
             gdtoolkit = {},
             pyright = {},
             stylua = {}, -- Used to format lua code
             codelldb = {},
+            zls = {},
             lua_ls = {
                 -- cmd = {...},
                 -- filetypes { ...},

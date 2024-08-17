@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
         if not utils.check_for_workspace() then
             utils.log("workspaces false")
             vim.defer_fn(function()
- --               vim.cmd("Telescope workspaces")
+                --               vim.cmd("Telescope workspaces")
             end, 1)
         end
     end,
@@ -38,18 +38,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "sh",
+    callback = function()
+        vim.lsp.start({
+            name = "bash-language-server",
+            cmd = { "bash-language-server", "start" },
+        })
+    end,
+})
 -- vim.api.nvim_create_autocmd("BufWritePost", {
 --     group = vim.api.nvim_create_augroup("__formatter__", { clear = true }),
 --     command = ":FormatWrite",
 -- })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-    -- pattern = "SConstruct",
+    pattern = "SConstruct",
     callback = function()
-        -- print("scons file")
-        -- if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
-        -- local buf = vim.api.nvim_get_current_buf()
-        -- vim.api.nvim_buf_set_option(buf, "filetype", "python")
-        -- end
+    -- print("scons file")
+    -- if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
+    --     local buf = vim.api.nvim_get_current_buf()
+    --     vim.api.nvim_buf_set_option(buf, "filetype", "python")
+    -- end
     end,
 })
