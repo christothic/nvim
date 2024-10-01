@@ -35,5 +35,6 @@
   "vim-gitgutter": { "branch": "main", "commit": "67ef116100b40f9ca128196504a2e0bc0a2753b0" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "window-picker": { "branch": "main", "commit": "41cfaa428577c53552200a404ae9b3a0b5719706" },
-  "workspaces.nvim": { "branch": "master", "commit": "88a477c8bc751dcb8fb2767b24484c5b244424eb" }
+  "workspaces.nvim": { "branch": "master", "commit": "88a477c8bc751dcb8fb2767b24484c5b244424eb" },
+  "yuck.vim": { "branch": "master", "commit": "9b5e0370f70cc30383e1dabd6c215475915fe5c3" }
 }

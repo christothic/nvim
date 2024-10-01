@@ -11,6 +11,8 @@ vim.opt.hlsearch = true
 vim.opt.showmode = true
 vim.opt.scrolloff = 15
 
+vim.opt.conceallevel = 1
+
 vim.opt.tabstop = 8
 vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 4

@@ -22,11 +22,11 @@ M.plugin = {
         workspaces = {
             {
                 name = "personal",
-                path = "~/vaults/personal",
+                path = "~/obsidian/personal",
             },
             {
                 name = "work",
-                path = "~/vaults/work",
+                path = "~/obsidian/work",
             },
         },
 

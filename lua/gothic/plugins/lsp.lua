@@ -8,6 +8,7 @@ M.plugin = { -- LSP Configuration & Plugins
     --     },
     -- },
     dependencies = { -- Automatically install LSPs and related tools to stdpath for neovim
+        -- "elkowar/yuck.vim",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -203,6 +204,7 @@ M.plugin = { -- LSP Configuration & Plugins
                 },
             },
             bashls = {},
+            -- yuck = {},
             -- ◍ bash-language-server bashls
             -- ◍ beautysh
             -- ◍ biome
