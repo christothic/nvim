@@ -98,8 +98,9 @@ end
 M.show_startup_floating_window = function()
     local buffer = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(buffer, 0, -1, false, debug_info)
-    local width = vim.api.nvim_get_option("columns")
-    local height = vim.api.nvim_get_option("lines")
+    local width = vim.api.nvim_get_option_value("columns", {})
+    local height = vim.api.nvim_get_option_value("lines", {})
+
     local win_height = math.ceil(height * 0.8)
     local win_width = math.ceil(width * 0.8)
     local row = math.ceil((height - win_height) / 2)
@@ -120,7 +121,8 @@ M.log_current_buffers = function()
     local buffer_to_close = nil
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         local buf_name = vim.api.nvim_buf_get_name(buf)
-        local is_listed = vim.api.nvim_buf_get_option(buf, "buflisted")
+
+        -- local is_listed = vim.api.nvim_buf_get_option(buf, "buflisted")
         -- vim.g.debug_info =
         --     vim.list_extend(vim.g.debug_info, {
         --         "Buf Num: " .. buf .. ", Buf Name: " .. buf_name .. ", Listed: " .. tostring(
