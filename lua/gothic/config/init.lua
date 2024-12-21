@@ -1,6 +1,6 @@
 vim.g.vim_session_filename = ".vimsession"
 
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
