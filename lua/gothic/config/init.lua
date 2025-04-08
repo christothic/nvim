@@ -1,6 +1,6 @@
 vim.g.vim_session_filename = ".vimsession"
 
--- vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwPlugin = 1
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.mouse = "a"
@@ -35,7 +35,10 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.g.undotree_SetFocusWhenToggle = 1
 
 -- terminal stuff
-vim.opt.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "bash"
+if vim.g.vscode then
+else
+    vim.opt.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "bash"
+end
 -- vim.opt.shellcmdflag =
 --     "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 -- vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
@@ -46,5 +49,9 @@ vim.opt.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "bash"
 local user = vim.g.config_username
 local config = user .. ".config"
 vim.g.user_keymaps = require(config .. ".keymaps")
-vim.g.user_keymaps.set_default_keys()
-require(config .. ".autocomands")
+if vim.g.vscode then
+else
+    vim.g.user_keymaps.set_default_keys()
+    -- vim.g.user_keymaps.set_debugger_keys()
+    require(config .. ".autocomands")
+end

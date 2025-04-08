@@ -8,19 +8,20 @@ M.plugin = {
             "nvim-neotest/nvim-nio",
         },
         config = function()
-            -- local dap = require("dap")
-            local _ = require("dap")
+            local dap = require("dap")
+            -- local _ = require("dap")
             local dapui = require("dapui")
             dapui.setup()
-            -- dap.listeners.after.event_initialized["dapui_config"] = function()
-            --     dapui.open()
-            -- end
-            -- dap.listeners.before.event_terminated["dapui_config"] = function()
-            --     dapui.close()
-            -- end
-            -- dap.listeners.before.event_exited["dapui_config"] = function()
-            --     dapui.close()
-            -- end
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+            vim.g.user_keymaps.set_debugger_keys(dap)
         end,
     },
     {
@@ -29,15 +30,13 @@ M.plugin = {
         dependencies = {
             {
                 "williamboman/mason.nvim",
-            },
-            {
                 "mfussenegger/nvim-dap",
                 -- config = function(_, _) require("core.utils").load_mappings("dap") end,
             },
         },
         opts = {
             handlers = {},
-            -- ensure_installed = { "codelldb" },
+            ensure_installed = { "codelldb" },
         },
     },
 }

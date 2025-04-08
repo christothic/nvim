@@ -127,7 +127,7 @@ M.set_default_keys = function()
     end, { desc = "Toggle undo tree" })
     vim.keymap.set(
         "n",
-        "<leader><F5>",
+        "<leader>U",
         "<cmd>UndotreePersistUndo<CR>",
         { desc = "Toggle persistant undo tree" }
     )
@@ -147,9 +147,35 @@ M.set_default_keys = function()
     vim.keymap.set("n", "<leader>mg", "<cmd>Neotree float git_status<CR>", { desc = "Manage Git" })
     vim.keymap.set("n", "<leader>mp", "<cmd>Lazy<CR>", { desc = "Manage Plugins" })
     vim.keymap.set("n", "<leader>ml", "<cmd>Mason<CR>", { desc = "Manage LSPs" })
+    -- vim.keymap.set("n", "<f10>", "<cmd>Mason<CR>", { desc = "Manage LSPs" })
 end
 
 M.set_lsp_keys = function() end
+
+M.set_debugger_keys = function(dap)
+    -- local dap = require("dap")
+    vim.keymap.set("n", "<leader>4", function()
+        dap.continue()
+    end, { desc = "Start/Continue DAP" })
+    vim.keymap.set("n", "<Leader>8", function()
+        dap.toggle_breakpoint()
+    end, { desc = "Toggle breakpoint" })
+    vim.keymap.set("n", "<Leader>9", function()
+        dap.step_over()
+    end, { desc = "Step over" })
+    vim.keymap.set("n", "<Leader>0", function()
+        dap.step_into()
+    end, { desc = "Step into" })
+    vim.keymap.set("n", "<Leader>-", function()
+        dap.step_out()
+    end, { desc = "Step out" })
+    vim.keymap.set("n", "<Leader>di", function()
+        require("dap.ui.widgets").hover()
+    end, { desc = "Inspect" })
+    vim.keymap.set("n", "<Leader>dp", function()
+        require("dap.ui.widgets").preview()
+    end, { desc = "Preview" })
+end
 
 M.set_telescope_keys = function()
     -- Telescope

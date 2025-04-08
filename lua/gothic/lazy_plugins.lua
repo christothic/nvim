@@ -41,11 +41,14 @@ M.init = function()
     vim.opt.rtp:prepend(lazypath)
 
     local user = vim.g.config_username
-    local plugins_path = "lua/" .. user .. "/plugins/*.lua"
-    local files = vim.api.nvim_get_runtime_file(plugins_path, true)
-    for _, file in ipairs(files) do
-        utils.log("loading: " .. file)
-        M.plugins[#M.plugins + 1] = dofile(file).plugin
+    if vim.g.vscode then
+    else
+        local plugins_path = "lua/" .. user .. "/plugins/*.lua"
+        local files = vim.api.nvim_get_runtime_file(plugins_path, true)
+        for _, file in ipairs(files) do
+            utils.log("loading: " .. file)
+            M.plugins[#M.plugins + 1] = dofile(file).plugin
+        end
     end
     require("lazy").setup(M.plugins, M.opts)
 end

@@ -4,7 +4,10 @@ M.plugin = { -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     -- opts = {
     --     setup = {
-    --         clangd = function(_, opts) opts.capabilities.offsetEncoding = { "utf-16" } end,
+    --         clangd = function(_, opts)
+    --             table.insert(opts.cmd, "--query-driver=/usr/bin/arm-none-eabi-g*")
+    --         end,
+    --         --         clangd = function(_, opts) opts.capabilities.offsetEncoding = { "utf-16" } end,
     --     },
     -- },
     dependencies = { -- Automatically install LSPs and related tools to stdpath for neovim
@@ -201,6 +204,7 @@ M.plugin = { -- LSP Configuration & Plugins
                     "--clang-tidy",
                     "--background-index",
                     "--cross-file-rename",
+                    "--query-driver=/usr/bin/arm-none-eabi-g*",
                 },
             },
             bashls = {},
@@ -222,8 +226,9 @@ M.plugin = { -- LSP Configuration & Plugins
             tsserver = {},
             rust_analyzer = {},
             gdtoolkit = {},
-            pyright = {},
+            -- pyright = {},
             stylua = {}, -- Used to format lua code
+            black = {},
             codelldb = {},
             zls = {},
             lua_ls = {
