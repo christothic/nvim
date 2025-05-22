@@ -38,11 +38,26 @@ M.plugin = {
     },
     config = function()
         -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-        vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-        vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-        vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-        vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
-
+        -- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+        -- vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+        -- vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+        -- vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
+        vim.diagnostic.config({
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = " ",
+                    [vim.diagnostic.severity.WARN] = " ",
+                    [vim.diagnostic.severity.INFO] = "󰋼 ",
+                    [vim.diagnostic.severity.HINT] = "󰌵 ",
+                },
+                numhl = {
+                    [vim.diagnostic.severity.ERROR] = "",
+                    [vim.diagnostic.severity.WARN] = "",
+                    [vim.diagnostic.severity.HINT] = "",
+                    [vim.diagnostic.severity.INFO] = "",
+                },
+            },
+        })
         require("neo-tree").setup({
             event_handlers = {
                 {
