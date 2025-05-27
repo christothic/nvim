@@ -1,5 +1,5 @@
 if not vim.g.vscode then
-    if vim.fn.has("macunix") then
+    if vim.fn.has("macunix") == 1 then
         vim.cmd("redir! > ~/.config/nvim/last_log.txt")
     else
         vim.cmd("redir! > ~\\AppData\\Local\\nvim\\last_log.txt")
