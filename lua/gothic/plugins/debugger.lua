@@ -24,21 +24,21 @@ M.plugin = {
             vim.g.user_keymaps.set_debugger_keys(dap)
         end,
     },
-    {
-        "jay-babu/mason-nvim-dap.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            {
-                "williamboman/mason.nvim",
-                "mfussenegger/nvim-dap",
-                -- config = function(_, _) require("core.utils").load_mappings("dap") end,
-            },
-        },
-        opts = {
-            handlers = {},
-            ensure_installed = { "codelldb" },
-        },
-    },
+    -- {
+    --     "jay-babu/mason-nvim-dap.nvim",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         {
+    --             "williamboman/mason.nvim",
+    --             "mfussenegger/nvim-dap",
+    --             -- config = function(_, _) require("core.utils").load_mappings("dap") end,
+    --         },
+    --     },
+    --     opts = {
+    --         handlers = {},
+    --         ensure_installed = { "codelldb" },
+    --     },
+    -- },
 }
 
 return M
