@@ -37,31 +37,31 @@ end
 
 M.check_for_workspace = function()
     -- vim.g.debug_info = vim.list_extend(vim.g.debug_info, { "Args " .. vim.inspect(vim.v.argv) })
-    local workspaces = require("workspaces")
-    for _, workspace in ipairs(workspaces.get()) do
-        local path = workspace.path
-        local wait_time = 1
-        for i, arg in pairs(vim.v.argv) do
-            if i == 1 or i == 2 then goto continue end
-            -- vim.g.debug_info =
-            --     vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
-            if M.compare_paths(arg, path) then
-                -- vim.g.debug_info =
-                -- vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
-                vim.defer_fn(function()
-                    workspaces.open(workspace.name)
-                end, wait_time)
-                return true
-            end
-            ::continue::
-        end
-        if M.compare_paths(vim.fn.getcwd(), path) then
-            vim.defer_fn(function()
-                workspaces.open(workspace.name)
-            end, wait_time)
-            return true
-        end
-    end
+    -- local workspaces = require("workspaces")
+    -- for _, workspace in ipairs(workspaces.get()) do
+    -- local path = workspace.path
+    -- local wait_time = 1
+    -- for i, arg in pairs(vim.v.argv) do
+    --     if i == 1 or i == 2 then goto continue end
+    --     -- vim.g.debug_info =
+    --     --     vim.list_extend(vim.g.debug_info, { "Checking " .. arg .. " with " .. path })
+    --     if M.compare_paths(arg, path) then
+    --         -- vim.g.debug_info =
+    --         -- vim.list_extend(vim.g.debug_info, { "Found " .. arg .. " " .. path })
+    --         vim.defer_fn(function()
+    --             workspaces.open(workspace.name)
+    --         end, wait_time)
+    --         return true
+    --     end
+    --     ::continue::
+    -- end
+    -- if M.compare_paths(vim.fn.getcwd(), path) then
+    --     vim.defer_fn(function()
+    --         workspaces.open(workspace.name)
+    --     end, wait_time)
+    --     return true
+    -- end
+    -- end
     return false
 end
 
