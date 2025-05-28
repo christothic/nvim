@@ -11,7 +11,7 @@ M.plugin = { -- LSP Configuration & Plugins
     --     },
     -- },
     dependencies = { -- Automatically install LSPs and related tools to stdpath for neovim
-        -- "elkowar/yuck.vim",
+        "elkowar/yuck.vim",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -136,6 +136,9 @@ M.plugin = { -- LSP Configuration & Plugins
                 --    See `:help CursorHold` for information about when this is executed
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
+                local function s()
+                    local aaa
+                end
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
                 if client and client.server_capabilities.documentHighlightProvider then
                     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -275,9 +278,9 @@ M.plugin = { -- LSP Configuration & Plugins
         --         -- vim.list_extend(ensure_installed, {
         --         -- })
         --
-        -- require("mason-tool-installer").setup({
-        --     ensure_installed = ensure_installed,
-        -- })
+        require("mason-tool-installer").setup({
+            ensure_installed = ensure_installed,
+        })
 
         require("mason-lspconfig").setup({
             handlers = {
