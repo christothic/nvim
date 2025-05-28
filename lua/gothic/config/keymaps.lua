@@ -146,8 +146,15 @@ M.set_default_keys = function()
     -- Neo tree
     vim.keymap.set("n", "<leader>mg", "<cmd>Neotree float git_status<CR>", { desc = "Manage Git" })
     vim.keymap.set("n", "<leader>mp", "<cmd>Lazy<CR>", { desc = "Manage Plugins" })
-    vim.keymap.set("n", "<leader>ml", "<cmd>Mason<CR>", { desc = "Manage LSPs" })
+    -- vim.keymap.set("n", "<leader>ml", "<cmd>Mason<CR>", { desc = "Manage LSPs" })
     -- vim.keymap.set("n", "<f10>", "<cmd>Mason<CR>", { desc = "Manage LSPs" })
+    vim.keymap.set("n", "<leader>ml", function()
+        -- if vim.lsp.inlay_hint.is_enabled(0) then
+        --     vim.lsp.inlay_hint.enable(0, false)
+        -- else
+        vim.lsp.inlay_hint.enable(true)
+        -- end
+    end)
 end
 
 M.set_lsp_keys = function() end
