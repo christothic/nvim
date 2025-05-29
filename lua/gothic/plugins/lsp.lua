@@ -5,9 +5,9 @@ M.plugin = { -- LSP Configuration & Plugins
     opts = {
         inlay_hints = { enabled = true },
         --     setup = {
-        clangd = function(_, opts)
-            table.insert(opts.cmd, "--query-driver=/usr/bin/arm-none-eabi-g*")
-        end,
+        -- clangd = function(_, opts)
+        --     table.insert(opts.cmd, "--query-driver=/usr/bin/arm-none-eabi-g*")
+        -- end,
         --         --         clangd = function(_, opts) opts.capabilities.offsetEncoding = { "utf-16" } end,
         --     },
     },
@@ -202,16 +202,18 @@ M.plugin = { -- LSP Configuration & Plugins
             --                 capabilities = capabilities,
             --             },
             --
-            --             clangd = {
-            --                 cmd = {
-            --                     "clangd",
-            --                     "--offset-encoding=utf-16",
-            --                     "--clang-tidy",
-            --                     "--background-index",
-            --                     "--cross-file-rename",
-            --                     "--query-driver=/usr/bin/arm-none-eabi-g*",
-            --                 },
-            --             },
+            clangd = {},
+            -- clangd = {
+            -- cmd = {
+            --     "clangd",
+            --     "--offset-encoding=utf-16",
+            --     "--clang-tidy",
+            --     "--background-index",
+            --     "--cross-file-rename",
+            --     "--query-driver=/usr/bin/arm-none-eabi-g*",
+            -- },
+            ast_grep = {},
+            -- },
             bashls = {},
             --             -- yuck = {},
             --             -- ◍ bash-language-server bashls
