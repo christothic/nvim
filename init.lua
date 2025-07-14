@@ -1,9 +1,25 @@
-if not vim.g.vscode then
-    if vim.fn.has("macunix") == 1 then
-        vim.cmd("redir! > ~/.config/nvim/last_log.txt")
-    else
-        vim.cmd("redir! > ~\\AppData\\Local\\nvim\\last_log.txt")
-    end
-    vim.g.config_username = "gothic" -- use this to change config folders
-    require(vim.g.config_username)
+LSERVERS = {
+    "lua_ls",
+    "clangd",
+    "bashls", "shellcheck",
+}
+PLUGINS = {
+    require("nvim_dap"),
+    { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}, },
+    { "mason-org/mason.nvim", opts = {} },
+    { "junegunn/fzf.vim", dependencies = { "junegunn/fzf" } },
+    { "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate" },
+    { "folke/which-key.nvim", event = "VeryLazy", opts = {} },
+}
+-- PLUGINS = nil
+local plugins = require("plugins")
+if PLUGINS then
+    plugins.init()
+end
+require("config")
+require("keymaps")
+require("lsp_config")
+if PLUGINS then
+    plugins.config()
+    require("extra_keymaps")
 end
