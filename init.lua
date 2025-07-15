@@ -2,6 +2,7 @@ LSERVERS = {
     "lua_ls",
     "clangd",
     "bashls", "shellcheck",
+    "nil_ls",
 }
 PLUGINS = {
     require("nvim_dap"),
