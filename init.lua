@@ -17,7 +17,7 @@ PLUGINS = {
     { "folke/flash.nvim",                event = "VeryLazy",               opts = {} },
     require("oil_nvim"),
     --Helper
-    { "folke/which-key.nvim", event = "VeryLazy", opts = {} },
+    { "folke/which-key.nvim", event = "VeryLazy", opts = {}, },
     { "mbbill/undotree" },
     require("vim_floatterm"),
 }

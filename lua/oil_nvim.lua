@@ -81,6 +81,13 @@ return {
                 ["gx"] = "actions.open_external",
                 ["g."] = { "actions.toggle_hidden", mode = "n" },
                 ["g\\"] = { "actions.toggle_trash", mode = "n" },
+                ["\\\\"] = {
+                    function()
+                        require("oil.actions").open_terminal.callback()
+                        vim.api.nvim_feedkeys("i", "n", false)
+                    end,
+                    mode = "n"
+                },
             },
             -- Set to false to disable all of the above keymaps
             use_default_keymaps = false,
