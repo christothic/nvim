@@ -3,14 +3,23 @@ LSERVERS = {
     "clangd",
     "bashls", "shellcheck",
     "nil_ls",
+    "rust_analyzer",
 }
 PLUGINS = {
     require("nvim_dap"),
-    { "folke/tokyonight.nvim", lazy = false, priority = 1000, opts = {}, },
-    { "mason-org/mason.nvim", opts = {} },
-    { "junegunn/fzf.vim", dependencies = { "junegunn/fzf" } },
-    { "nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate" },
+    --Color
+    { "folke/tokyonight.nvim",           lazy = false,                     priority = 1000, opts = {}, },
+    --LSP
+    { "mason-org/mason.nvim",            opts = {} },
+    { "nvim-treesitter/nvim-treesitter", branch = 'master',                lazy = false,    build = ":TSUpdate" },
+    --Movement
+    { "junegunn/fzf.vim",                dependencies = { "junegunn/fzf" } },
+    { "folke/flash.nvim",                event = "VeryLazy",               opts = {} },
+    require("oil_nvim"),
+    --Helper
     { "folke/which-key.nvim", event = "VeryLazy", opts = {} },
+    { "mbbill/undotree" },
+    require("vim_floatterm"),
 }
 -- PLUGINS = nil
 local plugins = require("plugins")

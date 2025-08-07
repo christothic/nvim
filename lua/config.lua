@@ -30,7 +30,7 @@ vim.opt.showmatch = true
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
 vim.opt.autoread = true
--- vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes"
 vim.opt.encoding = "UTF-8"
 vim.opt.cursorcolumn = true
 vim.opt.path:append("**")
@@ -38,11 +38,10 @@ vim.opt.iskeyword:remove('_')
 
 vim.cmd.colorscheme("zaibatsu")
 local cursorPosHL = "#3b2d4e"
-vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorPosHL } )
-vim.api.nvim_set_hl(0, "CursorColumn", { bg = cursorPosHL } )
-vim.api.nvim_set_hl(0, "ModeMsg", { fg = "#fafafa", bg = "#4a4a00" } )
-vim.api.nvim_set_hl(0, "MatchParen", { fg = "Yellow", bg = "#245424" } )
-vim.api.nvim_set_hl(0, "Normal", { bg = "none"} )
-vim.api.nvim_set_hl(0, "NonText", { bg = "none"} )
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none"} )
-
+vim.api.nvim_set_hl(0, "CursorLine", { bg = cursorPosHL })
+vim.api.nvim_set_hl(0, "CursorColumn", { bg = cursorPosHL })
+vim.api.nvim_set_hl(0, "ModeMsg", { fg = "#fafafa", bg = "#4a4a00" })
+vim.api.nvim_set_hl(0, "MatchParen", { fg = "Yellow", bg = "#245424" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
