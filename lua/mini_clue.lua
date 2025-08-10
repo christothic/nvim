@@ -44,6 +44,19 @@ return {
                 miniclue.gen_clues.windows(),
                 miniclue.gen_clues.z(),
             },
+            window = {
+                -- Show window immediately
+                delay = 0,
+
+                config = {
+                    -- Compute window width automatically
+                    width = 'auto',
+
+                    -- Use double-line border
+                    -- border = 'double',
+                },
+            },
+
         })
     end,
     version = false

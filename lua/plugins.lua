@@ -16,7 +16,7 @@ M.init = function()
 end
 M.config = function()
     require("lazy").setup({
-        spec = PLUGINS,
+        spec = Plugins,
         install = { colorscheme = { "zaibatsu" } },
         checker = { enabled = false },
         -- checker = { enabled = true },

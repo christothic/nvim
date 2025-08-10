@@ -15,28 +15,14 @@ return {
 
                 -- Module mappings created only inside explorer.
                 -- Use `''` (empty string) to not create one.
-                mappings = {
-                    close       = 'q',
-                    go_in       = 'l',
-                    go_in_plus  = 'L',
-                    go_out      = 'h',
-                    go_out_plus = 'H',
-                    mark_goto   = "'",
-                    mark_set    = 'm',
-                    reset       = '<BS>',
-                    reveal_cwd  = '@',
-                    show_help   = 'g?',
-                    synchronize = '<c-s>',
-                    trim_left   = '<',
-                    trim_right  = '>',
-                },
+                mappings = ExtraKeymaps.MiniFilesMappings(),
 
                 -- General options
                 options = {
                     -- Whether to delete permanently or move into module-specific trash
                     permanent_delete = false,
                     -- Whether to use for editing directories
-                    use_as_default_explorer = true,
+                    use_as_default_explorer = false,
                 },
 
                 -- Customization of explorer windows
