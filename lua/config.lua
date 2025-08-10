@@ -31,7 +31,7 @@ vim.opt.showmatch = true
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
 vim.opt.autoread = true
-vim.opt.signcolumn = "yes"
+-- vim.opt.signcolumn = "yes"
 vim.opt.encoding = "UTF-8"
 vim.opt.cursorcolumn = true
 vim.opt.path:append("**")

@@ -33,9 +33,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-        if client:supports_method('textDocument/implementation') then
-            -- Create a keymap for vim.lsp.buf.implementation ...
-        end
+        -- if client:supports_method('textDocument/implementation') then
+        --     -- Create a keymap for vim.lsp.buf.implementation ...
+        -- end
         -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
         if client:supports_method('textDocument/completion') then
             -- Optional: trigger autocompletion on EVERY keypress. May be slow!

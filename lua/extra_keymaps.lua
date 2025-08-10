@@ -48,7 +48,7 @@ vim.keymap.set({ "o", "x" }, "R", function() flash.treesitter_search() end, { de
 vim.keymap.set({ 'n' }, '<leader>ut', vim.cmd.UndotreeToggle, { desc = "Open Undo History" })
 
 --Oil nvim
-vim.keymap.set({ "n" }, "-", ":Oil<cr>", { desc = "Open parent directory" })
+vim.keymap.set({ "n" }, "_", ":Oil<cr>", { desc = "Open parent directory" })
 
 --vim-floater
 vim.keymap.set({ 'n' }, "\\\\", ":FloatermToggle<cr>", { desc = "FzF Floating Terminals", })
@@ -60,3 +60,9 @@ vim.keymap.set({ 't' }, "\\n", "<C-\\><C-n>:FloatermNew<cr>", { desc = "FzF Floa
 vim.keymap.set({ 't' }, "\\[", "<C-\\><C-n>:FloatermNext<cr>", { desc = "FzF Floating Terminals", })
 vim.keymap.set({ 't' }, "\\]", "<C-\\><C-n>:FloatermPrev<cr>", { desc = "FzF Floating Terminals", })
 vim.keymap.set({ 'n' }, "<leader>fe", ":Floaterms<cr>", { desc = "FzF Floating Terminals", })
+
+--Mini plugs
+MiniFiles = MiniFiles
+vim.keymap.set({ "n" }, "-", function() MiniFiles.open() end, { desc = "Open parent directory floating" })
+MiniDiff = MiniDiff
+vim.keymap.set({ "n" }, "<leader>sd", function() MiniDiff.toggle_overlay() end, { desc = "Show Diffs" })

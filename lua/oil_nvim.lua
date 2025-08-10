@@ -7,7 +7,8 @@ return {
         require("oil").setup({
             -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
             -- Set to false if you want some other plugin (e.g. netrw) to open when you edit directories.
-            default_file_explorer = true,
+            -- default_file_explorer = true,
+            default_file_explorer = false,
             -- Id is automatically added at the beginning, and name at the end
             -- See :help oil-columns
             columns = {
@@ -24,13 +25,15 @@ return {
             -- Window-local options to use for oil buffers
             win_options = {
                 wrap = true,
-                signcolumn = "no",
                 cursorcolumn = false,
                 foldcolumn = "0",
                 spell = false,
                 list = false,
                 conceallevel = 3,
                 concealcursor = "nvic",
+                signcolumn = "no",
+                -- signcolumn = "yes:2",
+
             },
             -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
             delete_to_trash = true,
