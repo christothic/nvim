@@ -49,7 +49,7 @@ M.SetupKeys = function()
     --UndoTree
     vim.keymap.set({ 'n' }, '<leader>ut', vim.cmd.UndotreeToggle, { desc = "Open Undo History" })
 
-    --vim-floater
+    --vim-floaterm
     vim.keymap.set({ 'n' }, "\\\\", ":FloatermToggle<cr>", { desc = "FzF Floating Terminals", })
     vim.keymap.set({ 'n' }, "\\n", ":FloatermNew<cr>", { desc = "FzF Floating Terminals", })
     vim.keymap.set({ 'n' }, "\\[", ":FloatermNext<cr>", { desc = "FzF Floating Terminals", })
