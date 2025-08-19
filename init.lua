@@ -4,6 +4,7 @@ LSPServers = {
     "bashls", "shellcheck",
     "nil_ls",
     "rust_analyzer",
+    "zls",
 }
 ExtraKeymaps = require("extra_keymaps")
 Plugins = {

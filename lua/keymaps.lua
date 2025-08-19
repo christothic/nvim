@@ -28,6 +28,6 @@ vim.keymap.set({ 'i' }, "<Tab>", 'pumvisible() ? "<c-n>" : "<Tab>"', { expr = tr
 vim.keymap.set({ 'i' }, "<s-Tab>", 'pumvisible() ? "<c-p>" : "<s-Tab>"', { expr = true, desc = "Previous Completion", })
 vim.keymap.set({ 'i' }, "<c-l>", function() vim.snippet.jump(1) end, { desc = "Next Placeholder", })
 vim.keymap.set({ 'i' }, "<c-h>", function() vim.snippet.jump(-1) end, { desc = "Previous Placeholder", })
-vim.keymap.set({ 't' }, "<Esc><Esc>", '<c-\\><c-n>', { desc = "Exit terminal mode", })
+vim.keymap.set({ 't' }, "<c-Esc>", '<c-\\><c-n>', { desc = "Exit terminal mode", })
 vim.keymap.set({ "n" }, "<leader>s", "", { desc = "Show" })
 vim.keymap.set({ 'n' }, "<leader>u", "", { desc = "Undo" })
