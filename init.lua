@@ -38,8 +38,10 @@ Plugins = {
 -- Plugins = nil
 local plugins = require("plugins")
 if Plugins then plugins.init() end
+require("utils")
 require("config")
 require("keymaps")
 require("lsp_config")
 if Plugins then plugins.config() end
 require("autocmds")
+LoadProjectSettings()
