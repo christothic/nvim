@@ -34,6 +34,7 @@ Plugins = {
     require("mini_clue"),
     -- { "folke/which-key.nvim", event = "VeryLazy", opts = {}, }, -- breaks '<c-o>gg' on 'i' mode
     -- require("mini_surround"),
+    require("advanced_git_search"),
 }
 -- Plugins = nil
 local plugins = require("plugins")
