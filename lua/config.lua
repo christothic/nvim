@@ -36,6 +36,8 @@ vim.opt.encoding = "UTF-8"
 vim.opt.cursorcolumn = true
 vim.opt.path:append("**")
 vim.opt.iskeyword:remove('_')
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
 
 vim.cmd.colorscheme("zaibatsu")
 local cursorPosHL = "#3b2d4e"
