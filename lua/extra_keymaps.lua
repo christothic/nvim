@@ -22,6 +22,9 @@ M.SetupKeys = function()
     vim.keymap.set({ 'n' }, "<leader>fM", ":BMarks<cr>", { desc = "FzF Marks in current buffer", })
     vim.keymap.set({ 'n' }, "<leader>fw", ":Windows<cr>", { desc = "FzF Windows", })
     vim.keymap.set({ 'n' }, "<leader>fj", ":Jumps<cr>", { desc = "FzF Jumps", })
+
+    vim.keymap.set({ 'n' }, "<leader>fa", ":lua require('telescope').extensions.live_grep_args.live_grep_args()",
+        { desc = "Telescope RG Live Args", })
     --     "<cmd>Lines<cr>", desc = "FzF Lines in loaded buffers",
     --     "<cmd>Ag<cr>", desc = "awk search",
     --     "<cmd>Locate<cr>", desc = "Locate search output",

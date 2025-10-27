@@ -1,6 +1,7 @@
 LSPServers = {
     "lua_ls",
     "clangd",
+    "gdscript",
     "bashls", "shellcheck",
     "nil_ls",
     "rust_analyzer",
@@ -35,6 +36,7 @@ Plugins = {
     -- { "folke/which-key.nvim", event = "VeryLazy", opts = {}, }, -- breaks '<c-o>gg' on 'i' mode
     -- require("mini_surround"),
     require("advanced_git_search"),
+    { 'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim', { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0", } } },
 }
 -- Plugins = nil
 local plugins = require("plugins")
