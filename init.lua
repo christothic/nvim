@@ -17,11 +17,27 @@ Plugins = {
     -- require("obsidian_nvim"),
     require("render_markdown"),
     --LSP
-    { "mason-org/mason.nvim",            opts = {} },
-    { "nvim-treesitter/nvim-treesitter", branch = 'master',                lazy = false, build = ":TSUpdate" },
+    { "mason-org/mason.nvim", opts = {} },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                highlight = {
+                    enable = true, -- Enable syntax highlighting
+                },
+                indent = {
+                    enable = true,                  -- Enable indentation
+                    disable = { "gd", "gdscript" }, -- Replace with the file type you want to disable
+                },
+            })
+        end,
+        branch = 'master',
+        lazy = false,
+        build = ":TSUpdate"
+    },
     --Movement
-    { "junegunn/fzf.vim",                dependencies = { "junegunn/fzf" } },
-    { "folke/flash.nvim",                event = "VeryLazy",               opts = {} },
+    { "junegunn/fzf.vim",     dependencies = { "junegunn/fzf" } },
+    { "folke/flash.nvim",     event = "VeryLazy",               opts = {} },
     --Helper
     require("oil_nvim"),
     { "JezerM/oil-lsp-diagnostics.nvim", dependencies = { "stevearc/oil.nvim" }, opts = {} },
@@ -37,6 +53,7 @@ Plugins = {
     -- require("mini_surround"),
     require("advanced_git_search"),
     { 'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim', { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0", } } },
+    -- { "habamax/vim-godot" },
 }
 -- Plugins = nil
 local plugins = require("plugins")
